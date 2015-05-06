@@ -1,5 +1,6 @@
 using Advertisements.Infrastructures.Services;
 using Advertisements.Infrastructures.Services.Contracts;
+using Advertisements.Infrastructures.Services.Validation;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(Advertisements.Web.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(Advertisements.Web.App_Start.NinjectWebCommon), "Stop")]
@@ -66,6 +67,10 @@ namespace Advertisements.Web.App_Start
             kernel.Bind<IAdsData>().To<AdsData>();
 
             kernel.Bind<IHomeServices>().To<HomeServices>();
+
+            kernel.Bind<IAdvertisementsService>().To<AdvertisementsService>();
+
+            kernel.Bind<IValidationDictionary>().To<ModelStateWrapper>();
         }        
     }
 }
