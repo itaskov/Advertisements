@@ -1,4 +1,6 @@
 ﻿using System;
+using Advertisements.Data;
+using Advertisements.Models;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
