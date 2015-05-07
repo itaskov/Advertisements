@@ -21,8 +21,6 @@ namespace Advertisements.Web.Areas.Administration.Controllers
 
         public ActionResult Index()
         {
-            
-            
             var advertisements = this.Data.Advertisements.All().Include(a => a.Category).Include(a => a.Owner).Include(a => a.Town);
             return View(advertisements.ToList());
         }

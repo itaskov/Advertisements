@@ -8,6 +8,7 @@ using Advertisements.Infrastructures.Services;
 using Advertisements.Infrastructures.Services.Contracts;
 using Advertisements.Infrastructures.Services.Validation;
 using Advertisements.Models;
+using Advertisements.Web.Infrastructure.Caching;
 using Advertisements.Web.ViewModels.Home;
 
 namespace Advertisements.Web.Controllers
@@ -15,6 +16,7 @@ namespace Advertisements.Web.Controllers
     public class AdvertisementsController : BaseController
     {
         private readonly IAdvertisementsService advertisementsService;
+        private readonly IAspNetCurrentAppCache cache;
 
         public AdvertisementsController()
             : base(new AdsData())
