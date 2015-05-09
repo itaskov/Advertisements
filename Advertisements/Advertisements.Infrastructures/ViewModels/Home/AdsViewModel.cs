@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using Advertisements.Models;
@@ -22,6 +23,7 @@ namespace Advertisements.Web.ViewModels.Home
 
         public string OwnerPhone { get; set; }
 
+        [DataType(DataType.Date)]
         public DateTime Date { get; set; }
 
         #region IHaveCustomMappings Members

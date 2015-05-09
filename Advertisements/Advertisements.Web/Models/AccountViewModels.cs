@@ -1,5 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
+using Advertisements.Models;
 
 namespace Advertisements.Web.Models
 {
@@ -77,7 +81,7 @@ namespace Advertisements.Web.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
         [Required]
@@ -86,6 +90,13 @@ namespace Advertisements.Web.Models
         [Required]
         [DataType(DataType.PhoneNumber)]
         public string Phone { get; set; }
+
+        [Required]
+        [Display(Name = "Town")]
+        [UIHint("DropDownList")]
+        public int TownId { get; set; }
+
+        public IEnumerable<SelectListItem> Towns { get; set; }
     }
 
     public class ResetPasswordViewModel
@@ -103,7 +114,7 @@ namespace Advertisements.Web.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }

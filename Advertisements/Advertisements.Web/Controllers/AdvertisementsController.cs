@@ -53,6 +53,7 @@ namespace Advertisements.Web.Controllers
         #endregion
 
         [HttpGet]
+        [Authorize]
         public ActionResult Create()
         {
             return View(new AdsViewModel());
@@ -68,6 +69,7 @@ namespace Advertisements.Web.Controllers
                 var dbAd = AutoMapper.Mapper.Map<Advertisement>(model);
                 dbAd.Status = AdvertisementStatus.WaitingApproval;
                 dbAd.OwnerId = this.UserProfile.Id;
+                
                 this.Data.Advertisements.Add(dbAd);
                 this.Data.SaveChanges();
                 

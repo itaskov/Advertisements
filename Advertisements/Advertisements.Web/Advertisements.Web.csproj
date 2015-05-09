@@ -223,6 +223,8 @@
     </Compile>
     <Compile Include="Infrastructure\Caching\AspNetCurrentAppCache.cs" />
     <Compile Include="Infrastructure\Caching\IAspNetCurrentAppCache.cs" />
+    <Compile Include="Infrastructure\DataLoader\EfDataLoader.cs" />
+    <Compile Include="Infrastructure\DataLoader\IDataLoader.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -305,6 +307,8 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Advertisements\Create.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DropDownList.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Date.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -5,7 +5,9 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using Advertisements.Data;
 using Advertisements.Models;
+using Advertisements.Web.Infrastructure.DataLoader;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -18,12 +20,15 @@ namespace Advertisements.Web.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private IDataLoader dataLoader;
 
         public AccountController()
         {
+            this.dataLoader = new EfDataLoader(new AdsData());
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager ) :
+            this()
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -140,7 +145,21 @@ namespace Advertisements.Web.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            var model = new RegisterViewModel
+            {
+                Towns = this.dataLoader.GetTowns()
+                    .Select(t => new SelectListItem
+                    {
+                        Value = t.Id.ToString(),
+                        Text = t.Name,
+                        //Selected = (t.Id == 4),
+                        //Disabled = (t.Id == 1)
+                    }).ToList()
+            };
+
+            //ViewBag.UserLevelId = new SelectList(this.Data.UserLevels.All().ToList(), "Id", "Level", model.UserLevelId);
+
+            return View(model);
         }
 
         //
