@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Advertisements.Data;
 using Advertisements.Models;
+using Advertisements.Web.Infrastructure.DataLoader;
 
 namespace Advertisements.Web.Controllers
 {
@@ -14,9 +15,12 @@ namespace Advertisements.Web.Controllers
         
         protected ApplicationUser UserProfile;
 
-        protected BaseController(IAdsData data)
+        protected IDataLoader DataLoader;
+
+        protected BaseController(IAdsData data, IDataLoader dataLoader)
         {
             this.Data = data;
+            this.DataLoader = dataLoader;
         }
         
         protected override IAsyncResult BeginExecute(System.Web.Routing.RequestContext requestContext, AsyncCallback callback, object state)

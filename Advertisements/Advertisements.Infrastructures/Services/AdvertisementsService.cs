@@ -20,7 +20,7 @@ namespace Advertisements.Infrastructures.Services
             this.validationDictionary = validationDictionary;
         }
 
-        public bool CreateAd(AdsViewModel model)
+        public bool CreateAd(AdsIndexViewModel model)
         {
             var result = false;
 

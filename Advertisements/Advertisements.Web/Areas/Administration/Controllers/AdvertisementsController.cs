@@ -9,13 +9,15 @@ using System.Web;
 using System.Web.Mvc;
 using Advertisements.Data;
 using Advertisements.Models;
+using Advertisements.Web.Infrastructure.DataLoader;
 
 namespace Advertisements.Web.Areas.Administration.Controllers
 {
     public class AdvertisementsController : AdminController
     {
         // GET: Administration/Advertisements
-        public AdvertisementsController(IAdsData data) : base(data)
+        public AdvertisementsController(IAdsData data, IDataLoader dataLoader) 
+            : base(data, dataLoader)
         {
         }
 

@@ -4,11 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Advertisements.Data;
+using Advertisements.Infrastructures.InputModels.Advertisements;
 using Advertisements.Infrastructures.Services;
 using Advertisements.Infrastructures.Services.Contracts;
 using Advertisements.Infrastructures.Services.Validation;
 using Advertisements.Models;
 using Advertisements.Web.Infrastructure.Caching;
+using Advertisements.Web.Infrastructure.DataLoader;
 using Advertisements.Web.ViewModels.Home;
 
 namespace Advertisements.Web.Controllers
@@ -19,14 +21,14 @@ namespace Advertisements.Web.Controllers
         private readonly IAspNetCurrentAppCache cache;
 
         public AdvertisementsController()
-            : base(new AdsData())
+            : base(new AdsData(), new EfDataLoader())
         {
             var service = new AdvertisementsService(new AdsData(), new ModelStateWrapper(this.ModelState));
             this.advertisementsService = service;
         }
 
-        public AdvertisementsController(IAdvertisementsService advertisementsService, IAdsData adsData)
-            : base(adsData)
+        public AdvertisementsController(IAdvertisementsService advertisementsService, IAdsData adsData, IDataLoader dataLoader)
+            : base(adsData, dataLoader)
         {
             this.advertisementsService = advertisementsService;
         }
@@ -56,13 +58,18 @@ namespace Advertisements.Web.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            return View(new AdsViewModel());
+            var model = new AdsCreateViewModel
+            {
+                Towns = this.DataLoader.GetTownsSelectListItem().ToList()
+            };
+
+            return View(model);
         }
 
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(AdsViewModel model)
+        public ActionResult Create(AdsCreateViewModel model)
         {
             if (this.ModelState.IsValid)
             {

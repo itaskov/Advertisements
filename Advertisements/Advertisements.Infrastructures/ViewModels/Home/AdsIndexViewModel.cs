@@ -9,7 +9,7 @@ using TicketSystem.Web.Infrastructure.Mapping;
 
 namespace Advertisements.Web.ViewModels.Home
 {
-    public class AdsViewModel : IMapFrom<Advertisement>, IHaveCustomMappings
+    public class AdsIndexViewModel : IMapFrom<Advertisement>, IHaveCustomMappings
     {
         public string Title { get; set; }
 
@@ -30,11 +30,11 @@ namespace Advertisements.Web.ViewModels.Home
 
         public void CreateMappings(IConfiguration configuration)
         {
-            configuration.CreateMap<Advertisement, AdsViewModel>()
+            configuration.CreateMap<Advertisement, AdsIndexViewModel>()
                 .ForMember(d => d.OwnerName, opt => opt.MapFrom(s => s.Owner.Name))
                 .ForMember(d => d.OwnerEmail, opt => opt.MapFrom(s => s.Owner.Email))
-                .ForMember(d => d.OwnerPhone, opt => opt.MapFrom(s => s.Owner.PhoneNumber))
-                .ReverseMap();
+                .ForMember(d => d.OwnerPhone, opt => opt.MapFrom(s => s.Owner.PhoneNumber));
+            //.ReverseMap();
         }
 
         #endregion

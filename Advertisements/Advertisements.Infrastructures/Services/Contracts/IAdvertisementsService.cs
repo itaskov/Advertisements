@@ -4,6 +4,6 @@ namespace Advertisements.Infrastructures.Services.Contracts
 {
     public interface IAdvertisementsService
     {
-        bool CreateAd(AdsViewModel model);
+        bool CreateAd(AdsIndexViewModel model);
     }
 }

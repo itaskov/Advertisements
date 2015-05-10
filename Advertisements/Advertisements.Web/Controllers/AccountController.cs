@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using Advertisements.Data;
 using Advertisements.Models;
+using Advertisements.Web.Areas.Administration.Controllers;
 using Advertisements.Web.Infrastructure.DataLoader;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -16,19 +17,19 @@ using Advertisements.Web.Models;
 namespace Advertisements.Web.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : AdminController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-        private IDataLoader dataLoader;
 
-        public AccountController()
+        public AccountController() 
+            : base(new AdsData(), new EfDataLoader())
         {
-            this.dataLoader = new EfDataLoader(new AdsData());
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager ) :
-            this()
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, 
+            IAdsData data, IDataLoader dataLoader) :
+            base(data, dataLoader)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -147,17 +148,8 @@ namespace Advertisements.Web.Controllers
         {
             var model = new RegisterViewModel
             {
-                Towns = this.dataLoader.GetTowns()
-                    .Select(t => new SelectListItem
-                    {
-                        Value = t.Id.ToString(),
-                        Text = t.Name,
-                        //Selected = (t.Id == 4),
-                        //Disabled = (t.Id == 1)
-                    }).ToList()
+                Towns = this.DataLoader.GetTownsSelectListItem().ToList()
             };
-
-            //ViewBag.UserLevelId = new SelectList(this.Data.UserLevels.All().ToList(), "Id", "Level", model.UserLevelId);
 
             return View(model);
         }

@@ -5,6 +5,6 @@ namespace Advertisements.Infrastructures.Services.Contracts
 {
     public interface IHomeServices
     {
-        IQueryable<AdsViewModel> GetAllAds();
+        IQueryable<AdsIndexViewModel> GetAllAds();
     }
 }
