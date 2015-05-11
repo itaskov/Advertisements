@@ -1,4 +1,4 @@
-namespace Advertisements.Data.Migrations
+﻿namespace Advertisements.Data.Migrations
 {
     using System;
     using System.Collections.Generic;
@@ -161,7 +161,7 @@ namespace Advertisements.Data.Migrations
                     Owner = users[random.Next(users.Count)],
                     Category = null,
                     Town = null,
-                    Date = this.GenerateRandomDate(),
+                    DateCreated = this.GenerateRandomDate(),
                     Status = AdvertisementStatus.Published
                 },
                 new Advertisement()
@@ -172,7 +172,7 @@ namespace Advertisements.Data.Migrations
                     Owner = users[random.Next(users.Count)],
                     Category = categories.First(c => c.Name == "Properties"),
                     Town = towns[random.Next(towns.Count)],
-                    Date = this.GenerateRandomDate(),
+                    DateCreated = this.GenerateRandomDate(),
                     Status = AdvertisementStatus.Published
                 },
                 new Advertisement()
@@ -183,7 +183,7 @@ namespace Advertisements.Data.Migrations
                     Owner = users[random.Next(users.Count)],
                     Category = categories.First(c => c.Name == "Cars"),
                     Town = towns[random.Next(towns.Count)],
-                    Date = this.GenerateRandomDate(),
+                    DateCreated = this.GenerateRandomDate(),
                     Status = AdvertisementStatus.Published
                 },
                 new Advertisement()
@@ -194,7 +194,7 @@ namespace Advertisements.Data.Migrations
                     Owner = users[random.Next(users.Count)],
                     Category = categories.First(c => c.Name == "Phones"),
                     Town = towns[random.Next(towns.Count)],
-                    Date = this.GenerateRandomDate(),
+                    DateCreated = this.GenerateRandomDate(),
                     Status = AdvertisementStatus.Published
                 },
                 new Advertisement()
@@ -205,7 +205,7 @@ namespace Advertisements.Data.Migrations
                     Owner = users[random.Next(users.Count)],
                     Category = categories.First(c => c.Name == "Jobs"),
                     Town = towns[random.Next(towns.Count)],
-                    Date = this.GenerateRandomDate(),
+                    DateCreated = this.GenerateRandomDate(),
                     Status = AdvertisementStatus.Published
                 },
                 new Advertisement()
@@ -216,7 +216,7 @@ namespace Advertisements.Data.Migrations
                     Owner = users[random.Next(users.Count)],
                     Category = categories.First(c => c.Name == "Cars"),
                     Town = towns[random.Next(towns.Count)],
-                    Date = this.GenerateRandomDate(),
+                    DateCreated = this.GenerateRandomDate(),
                     Status = AdvertisementStatus.Published
                 },
                 new Advertisement()
@@ -229,7 +229,7 @@ namespace Advertisements.Data.Migrations
                     Owner = users[random.Next(users.Count)],
                     Category = categories.First(c => c.Name == "Jobs"),
                     Town = towns[random.Next(towns.Count)],
-                    Date = this.GenerateRandomDate(),
+                    DateCreated = this.GenerateRandomDate(),
                     Status = AdvertisementStatus.Published
                 },
                 new Advertisement()
@@ -240,7 +240,7 @@ namespace Advertisements.Data.Migrations
                     Owner = users[random.Next(users.Count)],
                     Category = categories.First(c => c.Name == "Electronics"),
                     Town = towns[random.Next(towns.Count)],
-                    Date = this.GenerateRandomDate(),
+                    DateCreated = this.GenerateRandomDate(),
                     Status = AdvertisementStatus.Published
                 },
                 new Advertisement()
@@ -251,7 +251,7 @@ namespace Advertisements.Data.Migrations
                     Owner = users[random.Next(users.Count)],
                     Category = categories.First(c => c.Name == "Electronics"),
                     Town = towns[random.Next(towns.Count)],
-                    Date = this.GenerateRandomDate(),
+                    DateCreated = this.GenerateRandomDate(),
                     Status = AdvertisementStatus.Published
                 },
                 new Advertisement()
@@ -262,7 +262,7 @@ namespace Advertisements.Data.Migrations
                     Owner = users[random.Next(users.Count)],
                     Category = categories.First(c => c.Name == "Sports"),
                     Town = towns[random.Next(towns.Count)],
-                    Date = this.GenerateRandomDate(),
+                    DateCreated = this.GenerateRandomDate(),
                     Status = AdvertisementStatus.Published
                 },
                 new Advertisement()
@@ -273,7 +273,7 @@ namespace Advertisements.Data.Migrations
                     Owner = users[random.Next(users.Count)],
                     Category = categories.First(c => c.Name == "Animals"),
                     Town = towns[random.Next(towns.Count)],
-                    Date = this.GenerateRandomDate(),
+                    DateCreated = this.GenerateRandomDate(),
                     Status = AdvertisementStatus.Published
                 },
                 new Advertisement()
@@ -284,7 +284,7 @@ namespace Advertisements.Data.Migrations
                     Owner = users[random.Next(users.Count)],
                     Category = categories.First(c => c.Name == "Animals"),
                     Town = towns[random.Next(towns.Count)],
-                    Date = this.GenerateRandomDate(),
+                    DateCreated = this.GenerateRandomDate(),
                     Status = AdvertisementStatus.WaitingApproval
                 },
                 new Advertisement()
@@ -295,7 +295,7 @@ namespace Advertisements.Data.Migrations
                     Owner = users[random.Next(users.Count)],
                     Category = categories.First(c => c.Name == "Animals"),
                     Town = towns[random.Next(towns.Count)],
-                    Date = this.GenerateRandomDate(),
+                    DateCreated = this.GenerateRandomDate(),
                     Status = AdvertisementStatus.Inactive
                 },
                 new Advertisement()
@@ -306,7 +306,7 @@ namespace Advertisements.Data.Migrations
                     Owner = users[random.Next(users.Count)],
                     Category = categories.First(c => c.Name == "Electronics"),
                     Town = towns[random.Next(towns.Count)],
-                    Date = this.GenerateRandomDate(),
+                    DateCreated = this.GenerateRandomDate(),
                     Status = AdvertisementStatus.WaitingApproval
                 },
                 new Advertisement()
@@ -317,7 +317,7 @@ namespace Advertisements.Data.Migrations
                     Owner = users[random.Next(users.Count)],
                     Category = categories.First(c => c.Name == "Properties"),
                     Town = towns[random.Next(towns.Count)],
-                    Date = this.GenerateRandomDate(),
+                    DateCreated = this.GenerateRandomDate(),
                     Status = AdvertisementStatus.Inactive
                 },
             };

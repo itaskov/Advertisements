@@ -13,21 +13,21 @@ namespace Advertisements.Web.Controllers
     {
         protected IAdsData Data { get; private set; }
         
-        protected ApplicationUser UserProfile;
+        //protected ApplicationUser UserProfile;
 
-        protected IDataLoader DataLoader;
+        public IDataLoader DataLoader;
 
         protected BaseController(IAdsData data, IDataLoader dataLoader)
         {
             this.Data = data;
             this.DataLoader = dataLoader;
         }
-        
-        protected override IAsyncResult BeginExecute(System.Web.Routing.RequestContext requestContext, AsyncCallback callback, object state)
-        {
-            this.UserProfile = this.Data.Users.All().FirstOrDefault(u => u.UserName == requestContext.HttpContext.User.Identity.Name);
+
+        //protected override IAsyncResult BeginExecute(System.Web.Routing.RequestContext requestContext, AsyncCallback callback, object state)
+        //{
+        //    this.UserProfile = this.Data.Users.All().FirstOrDefault(u => u.UserName == requestContext.HttpContext.User.Identity.Name);
             
-            return base.BeginExecute(requestContext, callback, state);
-        }
+        //    return base.BeginExecute(requestContext, callback, state);
+        //}
     }
 }

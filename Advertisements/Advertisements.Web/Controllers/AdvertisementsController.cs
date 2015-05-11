@@ -12,6 +12,8 @@ using Advertisements.Models;
 using Advertisements.Web.Infrastructure.Caching;
 using Advertisements.Web.Infrastructure.DataLoader;
 using Advertisements.Web.ViewModels.Home;
+using AutoMapper;
+using Microsoft.AspNet.Identity;
 
 namespace Advertisements.Web.Controllers
 {
@@ -73,9 +75,9 @@ namespace Advertisements.Web.Controllers
         {
             if (this.ModelState.IsValid)
             {
-                var dbAd = AutoMapper.Mapper.Map<Advertisement>(model);
+                var dbAd = Mapper.Map<Advertisement>(model);
                 dbAd.Status = AdvertisementStatus.WaitingApproval;
-                dbAd.OwnerId = this.UserProfile.Id;
+                dbAd.OwnerId = this.User.Identity.GetUserId();
                 
                 this.Data.Advertisements.Add(dbAd);
                 this.Data.SaveChanges();

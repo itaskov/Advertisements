@@ -24,7 +24,7 @@ namespace Advertisements.Web.ViewModels.Home
         public string OwnerPhone { get; set; }
 
         [DataType(DataType.Date)]
-        public DateTime Date { get; set; }
+        public DateTime DateCreated { get; set; }
 
         #region IHaveCustomMappings Members
 

@@ -6,6 +6,8 @@
 
     public class Advertisement
     {
+        private DateTime? dateCreated;
+
         [Key]
         public int Id { get; set; }
 
@@ -33,7 +35,11 @@
         public virtual Town Town { get; set; }
 
         [Required]
-        public DateTime Date { get; set; }
+        public DateTime DateCreated
+        {
+            get { return this.dateCreated ?? DateTime.Now; }
+            set { this.dateCreated = value; }
+        }
 
         [Required]
         public AdvertisementStatus Status { get; set; }

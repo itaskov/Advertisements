@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 using Advertisements.Data;
 using Advertisements.Infrastructures.Services.Contracts;
+using Advertisements.Infrastructures.Services.Validation;
 using Advertisements.Models;
 using Advertisements.Web.ViewModels.Home;
 
@@ -14,6 +16,12 @@ namespace Advertisements.Infrastructures.Services
     {
         private readonly IValidationDictionary validationDictionary;
 
+        public AdvertisementsService()
+            : this(new AdsData(), new ModelStateWrapper(new ModelStateDictionary()))
+        {
+            
+        }
+        
         public AdvertisementsService(IAdsData adsData, IValidationDictionary validationDictionary)
             : base(adsData)
         {

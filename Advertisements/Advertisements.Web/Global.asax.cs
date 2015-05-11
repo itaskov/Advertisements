@@ -20,6 +20,9 @@ namespace Advertisements.Web
 
             var autoMapperConfig = new AutoMapperConfig();
             autoMapperConfig.Execute();
+
+            ViewEngines.Engines.Clear();
+            ViewEngines.Engines.Add(new RazorViewEngine());
             
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

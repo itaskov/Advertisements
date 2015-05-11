@@ -6,11 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Advertisements.Models;
+using AutoMapper;
 using TicketSystem.Web.Infrastructure.Mapping;
 
 namespace Advertisements.Infrastructures.InputModels.Advertisements
 {
-    public class AdsCreateViewModel : IMapFrom<Advertisement>
+    public class AdsCreateViewModel : IHaveCustomMappings
     {
         [Required]
         [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 2)]
@@ -28,5 +29,16 @@ namespace Advertisements.Infrastructures.InputModels.Advertisements
         public int TownId { get; set; }
 
         public IEnumerable<SelectListItem> Towns { get; set; }
+
+        public DateTime? DateCreated { get; set; }
+
+        #region IHaveCustomMappings Members
+
+        public void CreateMappings(IConfiguration configuration)
+        {
+            configuration.CreateMap<AdsCreateViewModel, Advertisement>();
+        }
+
+        #endregion
     }
 }
