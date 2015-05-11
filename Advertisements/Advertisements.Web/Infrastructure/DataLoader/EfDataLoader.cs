@@ -38,5 +38,22 @@ namespace Advertisements.Web.Infrastructure.DataLoader
                         //Disabled = (t.Id == 1)
                     });
         }
+
+        public IQueryable<Category> GetCategories()
+        {
+            return this.data.Categories.All();
+        }
+
+        public IQueryable<SelectListItem> GetCategoriesSelectListItem()
+        {
+            return this.data.Categories.All()
+                .Select(c => new SelectListItem
+                {
+                    Value = c.Id.ToString(),
+                    Text = c.Name,
+                    //Selected = (t.Id == 4),
+                    //Disabled = (t.Id == 1)
+                });
+        }
     }
 }

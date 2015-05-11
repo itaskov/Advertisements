@@ -8,5 +8,8 @@ namespace Advertisements.Web.Infrastructure.DataLoader
     {
         IQueryable<Town> GetTowns();
         IQueryable<SelectListItem> GetTownsSelectListItem();
+
+        IQueryable<Category> GetCategories();
+        IQueryable<SelectListItem> GetCategoriesSelectListItem();
     }
 }

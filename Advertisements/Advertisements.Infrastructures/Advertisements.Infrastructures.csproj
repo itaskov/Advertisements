@@ -75,6 +75,7 @@
     <Compile Include="Services\Contracts\IHomeServices.cs" />
     <Compile Include="Services\Validation\ModelStateWrapper.cs" />
     <Compile Include="ViewModels\Home\AdsIndexViewModel.cs" />
+    <Compile Include="ViewModels\Home\RightSideBarViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Advertisements.Data\Advertisements.Data.csproj">
