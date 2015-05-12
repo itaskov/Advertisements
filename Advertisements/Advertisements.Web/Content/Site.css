@@ -22,3 +22,12 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.col-md-2 {
+	padding-left: 0
+}
+
+.list-group-item {
+	margin-bottom: 5px;
+	border-radius: 10px;
+}

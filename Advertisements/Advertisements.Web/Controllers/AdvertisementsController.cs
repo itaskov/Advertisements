@@ -11,7 +11,6 @@ using Advertisements.Infrastructures.Services.Validation;
 using Advertisements.Models;
 using Advertisements.Web.Infrastructure.Caching;
 using Advertisements.Web.Infrastructure.DataLoader;
-using Advertisements.Web.ViewModels.Home;
 using AutoMapper;
 using Microsoft.AspNet.Identity;
 

@@ -8,13 +8,13 @@ namespace Advertisements.Infrastructures.ViewModels.Home
     {
         [Display(Name = "Category")]
         [UIHint("DropDownList")]
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
 
         public IEnumerable<SelectListItem> Categories { get; set; }
 
         [Display(Name = "Town")]
         [UIHint("DropDownList")]
-        public int TownId { get; set; }
+        public int? TownId { get; set; }
 
         public IEnumerable<SelectListItem> Towns { get; set; }
     }

@@ -1,4 +1,4 @@
-using Advertisements.Web.ViewModels.Home;
+using Advertisements.Infrastructures.ViewModels.Home;
 
 namespace Advertisements.Infrastructures.Services.Contracts
 {

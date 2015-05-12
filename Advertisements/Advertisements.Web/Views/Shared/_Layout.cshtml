@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Glimpse.Core.Extensions
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -9,7 +10,7 @@
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -30,7 +31,17 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
+
+    @{
+        var containerClass = "container";
+        var controllerName = ViewContext.RouteData.GetRequiredString("controller");
+        if (controllerName == "Home")
+        {
+            containerClass = "container-fluid";
+        }
+    }
+
+    <div class="@containerClass body-content">
         @RenderBody()
         <hr />
         <footer>

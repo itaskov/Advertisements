@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-using Advertisements.Infrastructures.ViewModels.Home;
 using Advertisements.Models;
 using AutoMapper;
 using TicketSystem.Web.Infrastructure.Mapping;
 
-namespace Advertisements.Web.ViewModels.Home
+namespace Advertisements.Infrastructures.ViewModels.Home
 {
     public class AdsIndexViewModel : IMapFrom<Advertisement>, IHaveCustomMappings
     {

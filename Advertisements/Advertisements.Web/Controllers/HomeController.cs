@@ -25,35 +25,27 @@ namespace Advertisements.Web.Controllers
         {
         }
         
-        public ActionResult Index()
+        public ActionResult Index(RightSideBarViewModel model)
         {
-            return View(this.homeServices.GetAllAds().ToList());
-        }
-
-        [ChildActionOnly]
-        public ActionResult _RightSideBar()
-        {
-            var model = new RightSideBarViewModel
+            IEnumerable<AdsIndexViewModel> ads = null;
+            if (this.Request.IsAjaxRequest())
             {
-                Categories = this.DataLoader.GetCategoriesSelectListItem().ToList(),
-                Towns = this.DataLoader.GetTownsSelectListItem().ToList()
+                ads = this.homeServices.GetAllAds(model).ToList();
+                return PartialView("_Advertisement", ads);
+            }
+
+            ads = this.homeServices.GetAllAds().ToList();
+            var viewModel = new IndexViewModel
+            {
+                AdsIndexViewModel = ads,
+                RightSideBarViewModel = new RightSideBarViewModel
+                {
+                    Categories = this.DataLoader.GetCategoriesSelectListItem().ToList(),
+                    Towns = this.DataLoader.GetTownsSelectListItem().ToList()
+                }
             };
-
-            return PartialView(model);
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            
+            return View(viewModel);
         }
     }
 }

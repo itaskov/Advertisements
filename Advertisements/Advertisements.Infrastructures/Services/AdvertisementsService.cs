@@ -7,8 +7,8 @@ using System.Web.Mvc;
 using Advertisements.Data;
 using Advertisements.Infrastructures.Services.Contracts;
 using Advertisements.Infrastructures.Services.Validation;
+using Advertisements.Infrastructures.ViewModels.Home;
 using Advertisements.Models;
-using Advertisements.Web.ViewModels.Home;
 
 namespace Advertisements.Infrastructures.Services
 {
