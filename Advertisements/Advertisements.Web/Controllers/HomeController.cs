@@ -35,7 +35,7 @@ namespace Advertisements.Web.Controllers
                 ads = this.homeServices.GetAllAds(model).ToList();
                 return PartialView("_Advertisement", ads);
             }
-
+            
             ads = this.homeServices.GetAllAds(model).ToList();
             var viewModel = new IndexViewModel
             {

@@ -44,10 +44,30 @@
         }
     }
 
-    <main class="@containerClass body-content">
-        @RenderBody()
+    <div class="@containerClass body-content">
+        <div class="row">
+            <div class="col-md-2">
+                <aside>
+                    @RenderSection("Navigation", false)
+                </aside>
+            </div>
+
+            <div class="col-md-8 col-center">
+                <main>
+                    <section>
+                        @RenderBody()
+                    </section>
+                </main>
+            </div>
+
+            <div class="col-md-2">
+                <aside>
+                    @RenderSection("RightSideBar", false)
+                </aside>
+            </div>
+        </div>
         <hr />
-    </main>
+    </div>
     <footer>
         <p class="text-center">&copy; <em><strong>@DateTime.Now.Year - Advertisements</strong></em></p>
     </footer>

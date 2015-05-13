@@ -5,28 +5,21 @@
 }
 
 <header>
-    <h2 class="text-center">Ads - Home</h2>
+    <h2 class="text-center">@ViewBag.Title</h2>
 </header>
 
-
-<div class="row">
-    <div class="col-md-2">
-        <aside>
-            @Html.Partial("_Navigation")
-        </aside>
-    </div>
-    <div class="col-md-8 col-center">
-        <section>
-            <div id="all-ads" class=" jumbotron">
-                <div>
-                    @Html.Partial("_Advertisement", @Model.AdsIndexViewModel)
-                </div>
-            </div>
-        </section>
-    </div>
-    <div class="col-md-2">
-        <aside>
-            @Html.Partial("_RightSideBar", Model.RightSideBarViewModel)
-        </aside>
+<div class="jumbotron">
+    <div id="all-ads">
+        @Html.Partial("_Advertisement", @Model.AdsIndexViewModel)
     </div>
 </div>
+
+@section Navigation
+{
+    @Html.Partial("_Navigation")
+}
+
+@section RightSideBar
+{
+    @Html.Partial("_RightSideBar", Model.RightSideBarViewModel)
+}
