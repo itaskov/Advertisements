@@ -23,11 +23,37 @@ textarea {
     max-width: 280px;
 }
 
-.col-md-2 {
-	padding-left: 0
+.col-center {
+	padding: 0;
 }
 
-.list-group-item {
+#ad-list-group-item {
 	margin-bottom: 5px;
 	border-radius: 10px;
+}
+
+.btn-group-vertical {
+	width: 100%;
+}
+
+.btn-group-vertical > a {
+	text-align: left;
+	background-color: inherit;
+	border: none;
+	color: black;
+}
+
+.btn-group-vertical > a:hover, a:visited{
+	background-color: #dd4814;
+}
+
+.jumbotron {
+	margin-bottom: 0;
+	padding: 10px;
+	border-radius: 5px;
+}
+
+.pagination {
+	margin-top: 5px;
+	margin-bottom: 5px; 
 }

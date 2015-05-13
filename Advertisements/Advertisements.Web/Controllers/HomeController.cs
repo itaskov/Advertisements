@@ -12,6 +12,8 @@ namespace Advertisements.Web.Controllers
 {
     public class HomeController : BaseController
     {
+        public const int AdsPageSize = 5;
+        
         private readonly IHomeServices homeServices;
         
         public HomeController(IHomeServices homeServices) : 
@@ -34,7 +36,7 @@ namespace Advertisements.Web.Controllers
                 return PartialView("_Advertisement", ads);
             }
 
-            ads = this.homeServices.GetAllAds().ToList();
+            ads = this.homeServices.GetAllAds(model).ToList();
             var viewModel = new IndexViewModel
             {
                 AdsIndexViewModel = ads,

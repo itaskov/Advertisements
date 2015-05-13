@@ -1,29 +1,12 @@
-﻿@model Advertisements.Infrastructures.ViewModels.Home.RightSideBarViewModel
-
-<div class="well">
+﻿<div class="well">
     <fieldset>
         <legend>Navigation</legend>
-        @Html.EditorFor(m => m.CategoryId, new { ListItems = Model.Categories, SelectedItem = "All Categories" })
-        @Html.EditorFor(m => m.TownId, new { ListItems = Model.Towns, SelectedItem = "All Towns" })
-        <input class="btn btn-primary" type="submit" name="search-button" value="Search" />
+        <div class="btn-group-vertical">
+            <a href="#" class="btn btn-default">Home</a>
+            <a href="#" class="btn btn-default">My Ads</a>
+            <a href="#" class="btn btn-default">Publish New Ad</a>
+            <a href="#" class="btn btn-default">Edit Profile</a>
+        </div>
     </fieldset>
-</div>
-
-<div class="well">
-    @using (Ajax.BeginForm("Index", "Home",
-    new AjaxOptions
-    {
-        HttpMethod = "Get",
-        InsertionMode = InsertionMode.Replace,
-        UpdateTargetId = "all-ads",
-    }))
-    {
-        <fieldset>
-            <legend>Search</legend>
-            @Html.EditorFor(m => m.CategoryId, new { ListItems = Model.Categories, SelectedItem = "All Categories" })
-            @Html.EditorFor(m => m.TownId, new { ListItems = Model.Towns, SelectedItem = "All Towns" })
-            <input class="btn btn-primary" type="submit" name="search-button" value="Search" />
-        </fieldset>
-    }
 </div>
 
