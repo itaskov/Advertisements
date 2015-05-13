@@ -8,10 +8,8 @@
     <h2 class="text-center">@ViewBag.Title</h2>
 </header>
 
-<div class="jumbotron">
-    <div id="all-ads">
-        @Html.Partial("_Advertisement", @Model.AdsIndexViewModel)
-    </div>
+<div id="all-ads" class="jumbotron">
+    @Html.Partial("_Advertisement", @Model.AdsIndexViewModel)
 </div>
 
 @section Navigation
