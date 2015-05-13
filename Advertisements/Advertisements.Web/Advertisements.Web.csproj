@@ -314,6 +314,7 @@
     <Content Include="Views\Account\EditorTemplates\DropDownList.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DropDownList.cshtml" />
     <Content Include="Views\Home\_Advertisement.cshtml" />
+    <Content Include="Views\Home\_Navigation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

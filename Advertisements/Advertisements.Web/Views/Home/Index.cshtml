@@ -1,22 +1,26 @@
 ﻿@model Advertisements.Infrastructures.ViewModels.Home.IndexViewModel
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Ads - Home";
 }
 
-<h2 class="text-center">Ads - Home</h2>
+<header>
+    <h2 class="text-center">Ads - Home</h2>
+</header>
 
 
 <div class="row">
     <div class="col-md-2">
-
+        <aside></aside>
     </div>
     <div class="col-md-8">
-        <div class="jumbotron">
-            <div id="all-ads">
-                @Html.Partial("_Advertisement", @Model.AdsIndexViewModel)
+        <section>
+            <div id="all-ads" class=" jumbotron">
+                <div>
+                    @Html.Partial("_Advertisement", @Model.AdsIndexViewModel)
+                </div>
             </div>
-        </div>
+        </section>
     </div>
     <div class="col-md-2">
         <aside>

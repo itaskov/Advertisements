@@ -1,0 +1,29 @@
+﻿@model Advertisements.Infrastructures.ViewModels.Home.RightSideBarViewModel
+
+<div class="well">
+    <fieldset>
+        <legend>Navigation</legend>
+        @Html.EditorFor(m => m.CategoryId, new { ListItems = Model.Categories, SelectedItem = "All Categories" })
+        @Html.EditorFor(m => m.TownId, new { ListItems = Model.Towns, SelectedItem = "All Towns" })
+        <input class="btn btn-primary" type="submit" name="search-button" value="Search" />
+    </fieldset>
+</div>
+
+<div class="well">
+    @using (Ajax.BeginForm("Index", "Home",
+    new AjaxOptions
+    {
+        HttpMethod = "Get",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "all-ads",
+    }))
+    {
+        <fieldset>
+            <legend>Search</legend>
+            @Html.EditorFor(m => m.CategoryId, new { ListItems = Model.Categories, SelectedItem = "All Categories" })
+            @Html.EditorFor(m => m.TownId, new { ListItems = Model.Towns, SelectedItem = "All Towns" })
+            <input class="btn btn-primary" type="submit" name="search-button" value="Search" />
+        </fieldset>
+    }
+</div>
+
