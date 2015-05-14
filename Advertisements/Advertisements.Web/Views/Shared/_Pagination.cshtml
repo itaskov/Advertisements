@@ -1,0 +1,16 @@
+﻿@model Advertisements.Infrastructures.ViewModels.Home.RightSideBarViewModel
+
+<nav>
+    <ul class="pagination">
+        @*<li class="disabled" id="prev"><a href="#"><span aria-hidden="true">&laquo;</span><span class="sr-only">Previous</span></a></li>*@
+        @{ string selectedPage = "active"; }
+        @for (int i = 1; i <= Model.NumberOfPages; i++)
+        {
+            <li class="@selectedPage">
+                @Html.ActionLink(i.ToString(), "Index", new { controller = "Home", area = string.Empty, SelectedPage = i }, new { @class = "btn btn-primary" })
+            </li>
+            selectedPage = "";
+        }
+        @*<li id="next"><a href="#"><span aria-hidden="true">&raquo;</span><span class="sr-only">Next</span></a></li>*@
+    </ul>
+</nav>

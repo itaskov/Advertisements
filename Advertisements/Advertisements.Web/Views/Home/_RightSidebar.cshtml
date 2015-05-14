@@ -1,20 +1,13 @@
 ﻿@model Advertisements.Infrastructures.ViewModels.Home.RightSideBarViewModel
 
 <div class="well">
-    @using (Ajax.BeginForm("Index", "Home",
-    new AjaxOptions
-    {
-        HttpMethod = "Get",
-        InsertionMode = InsertionMode.Replace,
-        UpdateTargetId = "all-ads",
-    }))
+    @using (Html.BeginForm("Index", "Home", FormMethod.Get))
     {
         <fieldset>
             <legend>Search</legend>
             @Html.EditorFor(m => m.CategoryId, new { ListItems = Model.Categories, SelectedItem = "All Categories" })
             @Html.EditorFor(m => m.TownId, new { ListItems = Model.Towns, SelectedItem = "All Towns" })
-            <input class="btn btn-primary" type="submit" name="search-button" value="Search"/>
-            <input class="btn btn-info" type="reset" name="reset" value="Reset" />
+            <input class="btn btn-primary" type="submit" value="Search" />
         </fieldset>
     }
 </div>

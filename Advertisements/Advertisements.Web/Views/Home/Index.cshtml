@@ -9,6 +9,7 @@
 </header>
 
 <div id="all-ads" class="jumbotron">
+    @Html.Partial("_Pagination", @Model.RightSideBarViewModel)
     @Html.Partial("_Advertisement", @Model.AdsIndexViewModel)
 </div>
 

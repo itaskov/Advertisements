@@ -17,5 +17,10 @@ namespace Advertisements.Infrastructures.ViewModels.Home
         public int? TownId { get; set; }
 
         public IEnumerable<SelectListItem> Towns { get; set; }
+
+        public int? SelectedPage { get; set; }
+        public int NumberOfPages { get; set; }
+
+        public int PageSize { get; set; }
     }
 }
