@@ -7,7 +7,14 @@
         @for (int i = 1; i <= Model.NumberOfPages; i++)
         {
             <li class="@selectedPage">
-                @Html.ActionLink(i.ToString(), "Index", new { controller = "Home", area = string.Empty, SelectedPage = i }, new { @class = "btn btn-primary" })
+                @Html.ActionLink(i.ToString(), "Index", new
+           {
+               controller = "Home",
+               area = string.Empty,
+               SelectedPage = i,
+               CategoryId = @Model.CategoryId,
+               TownId = Model.TownId
+           }, new { @class = "btn btn-primary" })
             </li>
             selectedPage = "";
         }

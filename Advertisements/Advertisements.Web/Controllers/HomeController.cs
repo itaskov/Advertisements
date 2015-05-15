@@ -41,7 +41,9 @@ namespace Advertisements.Web.Controllers
                     Categories = this.DataLoader.GetCategoriesSelectListItem().ToList(),
                     Towns = this.DataLoader.GetTownsSelectListItem().ToList(),
                     NumberOfPages = (int)Math.Ceiling((double)this.homeServices.GetAllAds(model).Count() / AdsPageSize),
-                    SelectedPage = model.SelectedPage.GetValueOrDefault(1)
+                    SelectedPage = model.SelectedPage.GetValueOrDefault(1),
+                    CategoryId = model.CategoryId,
+                    TownId = model.TownId
                 }
             };
             
