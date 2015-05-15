@@ -13,9 +13,5 @@ namespace Advertisements.Infrastructures.ViewModels.Home
         public int NumberOfPages { get; set; }
         
         public int PageSize { get; set; }
-
-        public int? CategoryId { get; set; }
-
-        public int? TownId { get; set; }
     }
 }

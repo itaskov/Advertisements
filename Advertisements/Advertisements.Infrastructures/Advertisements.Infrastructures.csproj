@@ -76,6 +76,7 @@
     <Compile Include="Services\Validation\ModelStateWrapper.cs" />
     <Compile Include="ViewModels\Home\AdsIndexViewModel.cs" />
     <Compile Include="ViewModels\Home\IndexViewModel.cs" />
+    <Compile Include="ViewModels\Home\PaginationViewModel.cs" />
     <Compile Include="ViewModels\Home\RightSideBarViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
