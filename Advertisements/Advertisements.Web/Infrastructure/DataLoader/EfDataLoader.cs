@@ -38,7 +38,9 @@ namespace Advertisements.Web.Infrastructure.DataLoader
 
         public IQueryable<SelectListItem> GetTownsSelectListItem()
         {
-            return this.data.Towns.All()
+            var towns = this.GetTowns();
+            
+            return towns
                 .Select(t => new SelectListItem
                     {
                         Value = t.Id.ToString(),

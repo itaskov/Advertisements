@@ -14,11 +14,13 @@ namespace Advertisements.Web.Tests.Infrastructure.DataLoader
     {
         private readonly IAdsData data;
         private readonly EfDataLoader dataLoader;
+        private IAspNetCurrentAppCache cache;
         
         public DataLoaderTests()
         {
             this.data = new AdsData();
             this.dataLoader = new EfDataLoader(this.data, new AspNetCurrentAppCache());
+            this.cache = new AspNetCurrentAppCache();
         }
 
         [TestMethod]
@@ -28,6 +30,58 @@ namespace Advertisements.Web.Tests.Infrastructure.DataLoader
             var actual = this.data.Towns.All().ToList();
             
             var expected = this.dataLoader.GetTowns().ToList();
+
+            CollectionAssert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void GetTownsShouldReturnAllCategoriesFromCache()
+        {
+            // TODO: Implement mocking.
+            var actual = this.data.Towns.All().ToList();
+            this.cache.Insert("Towns", actual);
+
+            var expected = this.dataLoader.GetTowns().ToList();
+
+            CollectionAssert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void GetTownsSelectListItemShouldReturnAllCategories()
+        {
+            // TODO: Implement mocking.
+            var actual = this.data.Towns.All()
+                .Select(c => new SelectListItem
+                {
+                    Value = c.Id.ToString(),
+                    Text = c.Name,
+                })
+                .ToList();
+
+            var expected = this.dataLoader.GetTownsSelectListItem().ToList();
+
+            Assert.AreEqual(expected.Count, actual.Count);
+        }
+
+        [TestMethod]
+        public void GetCategoriesShouldReturnAllCategories()
+        {
+            // TODO: Implement mocking.
+            var actual = this.data.Categories.All().ToList();
+
+            var expected = this.dataLoader.GetCategories().ToList();
+
+            CollectionAssert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void GetCategoriesShouldReturnAllCategoriesFromCache()
+        {
+            // TODO: Implement mocking.
+            var actual = this.data.Categories.All().ToList();
+            this.cache.Insert("Categories", actual);
+
+            var expected = this.dataLoader.GetCategories().ToList();
 
             CollectionAssert.AreEqual(expected, actual);
         }
@@ -47,17 +101,6 @@ namespace Advertisements.Web.Tests.Infrastructure.DataLoader
             var expected = this.dataLoader.GetCategoriesSelectListItem().ToList();
 
             Assert.AreEqual(expected.Count, actual.Count);
-        }
-
-        [TestMethod]
-        public void GetCategoriesShouldReturnAllCategories()
-        {
-            // TODO: Implement mocking.
-            var actual = this.data.Categories.All().ToList();
-
-            var expected = this.dataLoader.GetCategories().ToList();
-
-            CollectionAssert.AreEqual(expected, actual);
         }
     }
 }
