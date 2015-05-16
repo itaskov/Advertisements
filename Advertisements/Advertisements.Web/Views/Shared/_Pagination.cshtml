@@ -1,8 +1,8 @@
 ﻿@model Advertisements.Infrastructures.ViewModels.Home.RightSideBarViewModel
 
 @{
-    string selectedPage = "active";
-    string disabledLink = "disabled";
+    const string selectedPage = "active";
+    const string disabledLink = "disabled";
     var nextPage = @Model.SelectedPage + 1;
     var prevPage = @Model.SelectedPage - 1;
 }
@@ -39,7 +39,6 @@
                        TownId = Model.TownId
                    }, new { @class = "btn btn-primary" })
             </li>
-            //selectedPage = "";
         }
 
         <li class="@if (@Model.SelectedPage >= Model.NumberOfPages)

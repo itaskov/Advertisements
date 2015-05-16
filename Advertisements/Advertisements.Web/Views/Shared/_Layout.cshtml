@@ -46,10 +46,12 @@
 
     <div class="@containerClass body-content">
         <div class="row">
-            <div class="col-md-2">
-                <aside>
-                    @RenderSection("Navigation", false)
-                </aside>
+            <div class="col-md-2 col-navigation">
+                <div class="position-fixed">
+                    <aside>
+                        @RenderSection("Navigation", false)
+                    </aside>
+                </div>
             </div>
 
             <div class="col-md-8 col-center">
@@ -60,10 +62,12 @@
                 </main>
             </div>
 
-            <div class="col-md-2">
-                <aside>
-                    @RenderSection("RightSideBar", false)
-                </aside>
+            <div class="col-md-2 col-right-sidebar">
+                <div class="position-fixed">
+                    <aside>
+                        @RenderSection("RightSideBar", false)
+                    </aside>
+                </div>
             </div>
         </div>
         <hr />

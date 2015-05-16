@@ -57,3 +57,12 @@ textarea {
 	margin-top: 5px;
 	margin-bottom: 5px; 
 }
+
+.col-navigation, .col-right-sidebar {
+	margin-top: 63px;
+}
+
+.position-fixed {
+	position: fixed;
+	width: 15%;
+}
