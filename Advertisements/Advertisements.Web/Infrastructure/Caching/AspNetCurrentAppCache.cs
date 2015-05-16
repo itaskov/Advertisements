@@ -19,7 +19,8 @@ namespace Advertisements.Web.Infrastructure.Caching
 
         public object Get(string cacheId)
         {
-            return HttpRuntime.Cache.Get(cacheId);
+            var result = HttpRuntime.Cache.Get(cacheId);
+            return result;
         }
 
         public object Remove(string cacheId)

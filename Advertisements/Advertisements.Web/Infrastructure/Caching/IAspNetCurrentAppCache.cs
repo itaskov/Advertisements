@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Advertisements.Web.Infrastructure.Caching
 {
     public interface IAspNetCurrentAppCache

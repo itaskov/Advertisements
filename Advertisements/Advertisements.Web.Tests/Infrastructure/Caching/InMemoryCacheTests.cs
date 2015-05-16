@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web;
+using Advertisements.Models;
 using Advertisements.Web.Infrastructure.Caching;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -30,7 +33,7 @@ namespace Advertisements.Web.Tests.Infrastructure.Caching
         [TestMethod]
         public void GetMethodShouldGetDataFromCache()
         {
-            var cacheID = "Categories";
+            var cacheID = "Object";
             object cacheValue = "1234";
             HttpRuntime.Cache.Insert(cacheID, cacheValue);
 
