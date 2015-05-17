@@ -1,0 +1,7 @@
+﻿@model int?
+
+<div class="form-group">
+    @Html.LabelFor(m => m)
+    @Html.DropDownListFor(m => m, (IEnumerable<SelectListItem>)ViewBag.ListItems, (string)ViewBag.SelectedItem, new { @class = "form-control" })
+    @Html.ValidationMessageFor(m => m, "", new { @class = "text-danger" })
+</div>

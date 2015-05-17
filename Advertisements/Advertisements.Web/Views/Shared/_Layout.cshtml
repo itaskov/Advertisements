@@ -23,12 +23,6 @@
                     <span></span>
                 </div>
                 <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            <li>@Html.ActionLink("Create new ad", "Create", "Advertisements")</li>
-                        }
-                    </ul>
                     @Html.Partial("_LoginPartial")
                 </div>
             </div>

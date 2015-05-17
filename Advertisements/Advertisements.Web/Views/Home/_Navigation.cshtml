@@ -6,7 +6,7 @@
             @if (User.Identity.IsAuthenticated)
             {
                 <a href="#" class="btn btn-default">My Ads</a>
-                @Html.ActionLink("Publish New Ad", "Create", "Advertisements", new { @class = "btn btn-default" })
+                @Html.ActionLink("Publish New Ad", "Create", "Advertisements", null, new { @class = "btn btn-default" })
                 <a href="#" class="btn btn-default">Edit Profile</a>
             }
         </div>
