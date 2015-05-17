@@ -9,7 +9,7 @@ using Advertisements.Data;
 using Advertisements.Infrastructures.InputModels.Advertisements;
 using Advertisements.Infrastructures.Services.Contracts;
 using Advertisements.Models;
-using Advertisements.Web.Tests.AllTestsCommon;
+using Advertisements.Tests.Common;
 using Advertisements.Web.Controllers;
 using Advertisements.Web.Infrastructure.DataLoader;
 using Microsoft.AspNet.Identity.EntityFramework;
@@ -21,11 +21,12 @@ namespace Advertisements.Web.Tests.Controllers
     [TestClass]
     public class AdvertisementsControllerTests : BaseControllerTests
     {
+        private readonly Mock<IAdvertisementsService> advertisementsServiceMock;
         private readonly AdvertisementsController controller;
-        
         
         public AdvertisementsControllerTests() 
         {
+            this.advertisementsServiceMock = new Mock<IAdvertisementsService>(MockBehavior.Strict);
             this.controller = new AdvertisementsController(this.advertisementsServiceMock.Object, this.dataMock.Object, this.dataLoaderMock.Object);
         }
         
@@ -40,7 +41,6 @@ namespace Advertisements.Web.Tests.Controllers
 
             var model = result.Model as AdsCreateViewModel;
             Assert.IsNotNull(model, "The model is null.");
-            Assert.IsInstanceOfType(model, typeof(AdsCreateViewModel));
 
             var towns = Common.GetTowns().Count;
             Assert.AreEqual(towns, model.Towns.Count(), "Different number of towns.");
@@ -101,7 +101,6 @@ namespace Advertisements.Web.Tests.Controllers
 
             var model = result.Model as AdsCreateViewModel;
             Assert.IsNotNull(model, "The model is null.");
-            Assert.IsInstanceOfType(model, typeof(AdsCreateViewModel));
             Assert.AreEqual(this.controller.ModelState.Count, validationResults.Count, "Model state errors are not e");
         }
     }

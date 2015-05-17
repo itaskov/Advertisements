@@ -3,7 +3,7 @@ using System.Linq;
 using Advertisements.Data;
 using Advertisements.Infrastructures.Services;
 using Advertisements.Infrastructures.Services.Contracts;
-using Advertisements.Infrastructures.Tests.AllTestsCommon;
+using Advertisements.Tests.Common;
 using Advertisements.Infrastructures.ViewModels.Home;
 using Advertisements.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

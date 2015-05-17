@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Advertisements.Data;
+using Advertisements.Infrastructures.Services;
 using Advertisements.Infrastructures.Services.Contracts;
 using Advertisements.Infrastructures.ViewModels.Home;
 using Advertisements.Web.Infrastructure.DataLoader;
@@ -17,15 +18,16 @@ namespace Advertisements.Web.Controllers
         
         private readonly IHomeServices homeServices;
         
-        public HomeController(IHomeServices homeServices) : 
+        public HomeController() : 
             base(new AdsData(), new EfDataLoader())
         {
-            this.homeServices = homeServices;
+            this.homeServices = new HomeServices();
         }
 
-        public HomeController(IAdsData data, IDataLoader dataLoader) :
+        public HomeController(IHomeServices homeServices, IAdsData data, IDataLoader dataLoader) :
             base(data, dataLoader)
         {
+            this.homeServices = homeServices;
         }
         
         public ActionResult Index(RightSideBarViewModel model)

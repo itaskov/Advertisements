@@ -24,8 +24,7 @@ namespace Advertisements.Web.Controllers
         public AdvertisementsController()
             : base(new AdsData(), new EfDataLoader())
         {
-            var service = new AdvertisementsService(new AdsData(), new ModelStateWrapper(this.ModelState));
-            this.advertisementsService = service;
+            this.advertisementsService = new AdvertisementsService(new AdsData(), new ModelStateWrapper(this.ModelState));
         }
 
         public AdvertisementsController(IAdvertisementsService advertisementsService, IAdsData adsData, IDataLoader dataLoader)

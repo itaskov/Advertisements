@@ -109,7 +109,6 @@
     <Reference Include="System.Net.Http.WebRequest" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AllTestsCommon\Common.cs" />
     <Compile Include="Controllers\AdvertisementsControllerTests.cs" />
     <Compile Include="Controllers\BaseControllerTests.cs" />
     <Compile Include="Infrastructure\Caching\InMemoryCacheTests.cs" />
@@ -135,6 +134,10 @@
     <ProjectReference Include="..\Advertisements.Models\Advertisements.Models.csproj">
       <Project>{a3e05c27-e8f6-4510-b9c5-7d2dde3b6aed}</Project>
       <Name>Advertisements.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Advertisements.Tests.Common\Advertisements.Tests.Common.csproj">
+      <Project>{546ddb47-424a-4528-b00e-6f66271b475d}</Project>
+      <Name>Advertisements.Tests.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Advertisements.Web\Advertisements.Web.csproj">
       <Project>{1009130D-D200-4B5B-9561-0BCF8B059B41}</Project>
