@@ -25,7 +25,8 @@ namespace Advertisements.Infrastructures.Services
 
         public IQueryable<AdsIndexViewModel> GetAllAds()
         {
-            return this.AllAds().Project().To<AdsIndexViewModel>();
+            var result = this.AllAds().Project().To<AdsIndexViewModel>();
+            return result;
         }
 
         private IQueryable<Advertisement> AllAds()

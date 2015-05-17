@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Advertisements.Infrastructu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Advertisements.Wpf", "Advertisements.Wpf\Advertisements.Wpf.csproj", "{65C4E82C-DE0D-4D2F-9464-470C210C41FA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Advertisements.Infrastructures.Tests", "Advertisements.Infrastructures.Tests\Advertisements.Infrastructures.Tests.csproj", "{F0BADD08-747D-4B57-89EE-191FBAA08489}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{65C4E82C-DE0D-4D2F-9464-470C210C41FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65C4E82C-DE0D-4D2F-9464-470C210C41FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65C4E82C-DE0D-4D2F-9464-470C210C41FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0BADD08-747D-4B57-89EE-191FBAA08489}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0BADD08-747D-4B57-89EE-191FBAA08489}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0BADD08-747D-4B57-89EE-191FBAA08489}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0BADD08-747D-4B57-89EE-191FBAA08489}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
