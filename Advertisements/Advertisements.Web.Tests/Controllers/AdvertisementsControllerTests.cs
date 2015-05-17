@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Security.Principal;
 using System.Web;
@@ -72,7 +73,7 @@ namespace Advertisements.Web.Tests.Controllers
             context.SetupGet(x => x.User).Returns(principal);
 
 
-            controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
+            this.controller.ControllerContext = new ControllerContext(context.Object, new RouteData(), controller);
             var result = controller.Create(model) as RedirectToRouteResult;
             
             Assert.AreEqual(true, isItemAdded);
@@ -83,6 +84,25 @@ namespace Advertisements.Web.Tests.Controllers
 
             Assert.AreEqual("Index", action);
             Assert.AreEqual("Home", ctrl);
+        }
+
+        [TestMethod]
+        public void CreateMethodPostShouldNotCreateAd()
+        {
+            var inputModel = new AdsCreateViewModel();
+
+            var validationContext = new ValidationContext(inputModel, null, null);
+            var validationResults = new List<ValidationResult>();
+            Validator.TryValidateObject(inputModel, validationContext, validationResults, true);
+            Common.ValidateViewModel(this.controller, inputModel);
+            var result = this.controller.Create(inputModel) as ViewResult;
+
+            Assert.IsNotNull(result, "Create action returns null.");
+
+            var model = result.Model as AdsCreateViewModel;
+            Assert.IsNotNull(model, "The model is null.");
+            Assert.IsInstanceOfType(model, typeof(AdsCreateViewModel));
+            Assert.AreEqual(this.controller.ModelState.Count, validationResults.Count, "Model state errors are not e");
         }
     }
 }
