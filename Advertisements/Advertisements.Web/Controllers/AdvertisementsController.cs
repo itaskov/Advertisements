@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Advertisements.Common;
 using Advertisements.Data;
 using Advertisements.Infrastructures.InputModels.Advertisements;
 using Advertisements.Infrastructures.Services;
@@ -60,7 +62,8 @@ namespace Advertisements.Web.Controllers
         {
             var model = new AdsCreateViewModel
             {
-                Towns = this.DataLoader.GetTownsSelectListItem().ToList()
+                Towns = this.DataLoader.GetTownsSelectListItem().ToList(),
+                Categories = this.DataLoader.GetCategoriesSelectListItem().ToList()
             };
 
             return View(model);
@@ -78,12 +81,29 @@ namespace Advertisements.Web.Controllers
                 dbAd.OwnerId = this.User.Identity.GetUserId();
                 
                 this.Data.Advertisements.Add(dbAd);
+
+                this.SaveImage(model.Image);
+
                 this.Data.SaveChanges();
                 
                 return this.RedirectToAction("Index", "Home");
             }
 
             return View(model);
-        } 
+        }
+
+        private void SaveImage(HttpPostedFileBase image)
+        {
+            if (image == null)
+            {
+                return;
+            }
+
+            string fileName = null;
+            string fileSavePath = null;
+            fileName = Path.GetFileName(image.FileName);
+            fileSavePath = Server.MapPath(Constant.VirtualPath + fileName);
+            image.SaveAs(fileSavePath); 
+        }
     }
 }

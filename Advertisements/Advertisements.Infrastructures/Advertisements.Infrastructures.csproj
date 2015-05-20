@@ -54,6 +54,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -80,6 +81,10 @@
     <Compile Include="ViewModels\Home\RightSideBarViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Advertisements.Common\Advertisements.Common.csproj">
+      <Project>{420a1c58-b29a-4ccd-bd53-7ad7ebd70f1f}</Project>
+      <Name>Advertisements.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Advertisements.Data\Advertisements.Data.csproj">
       <Project>{c4f20351-de3a-4f6d-b20a-e6680cebe50b}</Project>
       <Name>Advertisements.Data</Name>

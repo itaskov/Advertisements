@@ -1,8 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Routing;
 using Advertisements.Models;
 using AutoMapper;
 using TicketSystem.Web.Infrastructure.Mapping;
+using Advertisements.Common;
 
 namespace Advertisements.Infrastructures.ViewModels.Home
 {
@@ -30,7 +32,8 @@ namespace Advertisements.Infrastructures.ViewModels.Home
             configuration.CreateMap<Advertisement, AdsIndexViewModel>()
                 .ForMember(d => d.OwnerName, opt => opt.MapFrom(s => s.Owner.Name))
                 .ForMember(d => d.OwnerEmail, opt => opt.MapFrom(s => s.Owner.Email))
-                .ForMember(d => d.OwnerPhone, opt => opt.MapFrom(s => s.Owner.PhoneNumber));
+                .ForMember(d => d.OwnerPhone, opt => opt.MapFrom(s => s.Owner.PhoneNumber))
+                .ForMember(d => d.ImageDataURL, opt => opt.MapFrom(s => s.ImageDataURL == null || s.ImageDataURL.StartsWith("data:") ? s.ImageDataURL : Constant.VirtualPath + s.ImageDataURL));
             //.ReverseMap();
         }
 

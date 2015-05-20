@@ -66,3 +66,12 @@ textarea {
 	position: fixed;
 	width: 15%;
 }
+
+#image-preview {
+	width: 400px;
+	height: 315px;
+}
+
+textarea.form-control {
+	height: 100px;
+}
