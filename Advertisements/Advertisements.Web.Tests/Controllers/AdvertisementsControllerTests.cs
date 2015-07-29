@@ -109,5 +109,11 @@ namespace Advertisements.Web.Tests.Controllers
             Assert.IsNotNull(model, "The model is null.");
             Assert.AreEqual(this.controller.ModelState.Count, validationResults.Count, "Model state errors are not e");
         }
+
+        [TestMethod]
+        public void GetUserAdsMethodShouldReturnAllAdsUserHas()
+        {
+            
+        }
     }
 }

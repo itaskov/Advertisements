@@ -32,7 +32,9 @@
     @{
         var containerClass = "container";
         var controllerName = ViewContext.RouteData.GetRequiredString("controller");
-        if (controllerName == "Home")
+        var actionName = ViewContext.RouteData.GetRequiredString("action");
+        if (controllerName == "Home" ||
+           (controllerName == "Advertisements" && actionName == "Index"))
         {
             containerClass = "container-fluid";
         }
@@ -74,4 +76,5 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
+
 </html>

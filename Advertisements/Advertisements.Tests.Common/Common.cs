@@ -64,7 +64,8 @@ namespace Advertisements.Tests.Common
                     {
                         Name = "Ivan",
                         Email = "itaskov@gmail.com",
-                        PhoneNumber = "+359888476924"
+                        PhoneNumber = "+359888476924",
+                        Id = "16267522-28e1-498d-a3a4-cfea9608531b"
                     }
                 },
                 new Advertisement
@@ -79,7 +80,8 @@ namespace Advertisements.Tests.Common
                     {
                         Name = "Ivan",
                         Email = "itaskov@gmail.com",
-                        PhoneNumber = "+359888476924"
+                        PhoneNumber = "+359888476924",
+                        Id = "16267522-28e1-498d-a3a4-cfea9608531b"
                     }
                 },
                 new Advertisement
@@ -124,7 +126,8 @@ namespace Advertisements.Tests.Common
                     {
                         Name = "Ivan",
                         Email = "itaskov@gmail.com",
-                        PhoneNumber = "+359888476924"
+                        PhoneNumber = "+359888476924",
+                        Id = "16267522-28e1-498d-a3a4-cfea9608531b"
                     }
                 },
                 new Advertisement
@@ -139,7 +142,8 @@ namespace Advertisements.Tests.Common
                     {
                         Name = "Ivan",
                         Email = "itaskov@gmail.com",
-                        PhoneNumber = "+359888476924"
+                        PhoneNumber = "+359888476924",
+                        Id = "16267522-28e1-498d-a3a4-cfea9608531b"
                     }
                 },
                 new Advertisement
@@ -154,7 +158,8 @@ namespace Advertisements.Tests.Common
                     {
                         Name = "Ivan",
                         Email = "itaskov@gmail.com",
-                        PhoneNumber = "+359888476924"
+                        PhoneNumber = "+359888476924",
+                        Id = "16267522-28e1-498d-a3a4-cfea9608531b"
                     }
                 },
                 new Advertisement
@@ -169,7 +174,8 @@ namespace Advertisements.Tests.Common
                     {
                         Name = "Ivan",
                         Email = "itaskov@gmail.com",
-                        PhoneNumber = "+359888476924"
+                        PhoneNumber = "+359888476924",
+                        Id = "16267522-28e1-498d-a3a4-cfea9608531b"
                     }
                 },
             };

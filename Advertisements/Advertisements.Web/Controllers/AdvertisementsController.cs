@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Web;
 using System.Web.Mvc;
 using Advertisements.Common;
@@ -10,11 +11,14 @@ using Advertisements.Infrastructures.InputModels.Advertisements;
 using Advertisements.Infrastructures.Services;
 using Advertisements.Infrastructures.Services.Contracts;
 using Advertisements.Infrastructures.Services.Validation;
+using Advertisements.Infrastructures.ViewModels.Home;
 using Advertisements.Models;
 using Advertisements.Web.Infrastructure.Caching;
 using Advertisements.Web.Infrastructure.DataLoader;
 using AutoMapper;
 using Microsoft.AspNet.Identity;
+
+using  AutoMapper.QueryableExtensions;
 
 namespace Advertisements.Web.Controllers
 {
@@ -56,6 +60,40 @@ namespace Advertisements.Web.Controllers
         //} 
         #endregion
 
+        public ActionResult Index(RightSideBarViewModel model)
+        {
+            var currentPage = model.SelectedPage.GetValueOrDefault(1);
+            var currentUserId = this.User.Identity.GetUserId();
+            var numberOfUserAds = this.Data.Advertisements
+                .All()
+                .Count(a => a.OwnerId == currentUserId);
+            var numberOfPages = (int)Math.Ceiling((double)numberOfUserAds / HomeController.AdsPageSize);
+
+            var viewModel = new IndexViewModel();
+            var itemsToSkip = (currentPage - 1) * HomeController.AdsPageSize;
+            var adsIndexViewModel = this.Data.Advertisements
+                .All()
+                .Where(a => a.OwnerId == currentUserId).OrderBy(a => a.Id)
+                .Skip(itemsToSkip)
+                .Take(HomeController.AdsPageSize);
+            viewModel.AdsIndexViewModel = adsIndexViewModel
+                .Project()
+                .To<AdsIndexViewModel>()
+                .ToList();
+
+            viewModel.RightSideBarViewModel = new RightSideBarViewModel
+            {
+                CategoryId = model.CategoryId,
+                TownId = model.TownId,
+                Categories = this.DataLoader.GetCategoriesSelectListItem().ToList(),
+                Towns = this.DataLoader.GetTownsSelectListItem().ToList(),
+                SelectedPage = currentPage,
+                NumberOfPages = numberOfPages
+            };
+
+            return View("_AllAds", viewModel);
+        }
+        
         [HttpGet]
         [Authorize]
         public ActionResult Create()

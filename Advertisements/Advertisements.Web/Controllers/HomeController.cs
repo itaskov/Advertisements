@@ -49,7 +49,7 @@ namespace Advertisements.Web.Controllers
                 }
             };
             
-            return View(viewModel);
+            return View("_AllAds", viewModel);
         }
     }
 }
