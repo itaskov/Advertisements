@@ -39,6 +39,12 @@ namespace Advertisements.Web.Controllers
             this.advertisementsService = advertisementsService;
         }
 
+        public AdvertisementsController(IAdsData adsData)
+            : base(adsData, new EfDataLoader())
+        {
+            
+        }
+
         #region Create ad using service layer!
         //[HttpGet]
         //public ActionResult Create()
@@ -64,18 +70,20 @@ namespace Advertisements.Web.Controllers
         {
             var currentPage = model.SelectedPage.GetValueOrDefault(1);
             var currentUserId = this.User.Identity.GetUserId();
+            var adsPerPage = model.PageSize == 0 ? HomeController.AdsPageSize : model.PageSize;
             var numberOfUserAds = this.Data.Advertisements
                 .All()
                 .Count(a => a.OwnerId == currentUserId);
-            var numberOfPages = (int)Math.Ceiling((double)numberOfUserAds / HomeController.AdsPageSize);
+            var numberOfPages = (int)Math.Ceiling((double)numberOfUserAds / adsPerPage);
 
             var viewModel = new IndexViewModel();
-            var itemsToSkip = (currentPage - 1) * HomeController.AdsPageSize;
+            var itemsToSkip = (currentPage - 1) * adsPerPage;
             var adsIndexViewModel = this.Data.Advertisements
                 .All()
-                .Where(a => a.OwnerId == currentUserId).OrderBy(a => a.Id)
+                .Where(a => a.Owner.Id == currentUserId)
+                .OrderBy(a => a.Id)
                 .Skip(itemsToSkip)
-                .Take(HomeController.AdsPageSize);
+                .Take(adsPerPage);
             viewModel.AdsIndexViewModel = adsIndexViewModel
                 .Project()
                 .To<AdsIndexViewModel>()
