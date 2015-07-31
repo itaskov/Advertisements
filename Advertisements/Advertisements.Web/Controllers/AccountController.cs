@@ -17,7 +17,7 @@ using Advertisements.Web.Models;
 namespace Advertisements.Web.Controllers
 {
     [Authorize]
-    public class AccountController : AdminController
+    public class AccountController : AuthorizeController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;

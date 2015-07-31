@@ -215,10 +215,12 @@
     <Compile Include="Areas\Administration\Controllers\AdvertisementsController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AuthorizeController.cs" />
     <Compile Include="Controllers\AdvertisementsController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\UserProfileController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -320,12 +322,18 @@
     <Content Include="Views\Account\EditorTemplates\_RightSidebarDropDownList.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\_RightSidebarDropDownList.cshtml" />
     <Content Include="Views\Advertisements\EditorTemplates\DropDownList.cshtml" />
+    <Content Include="Views\UserProfile\Create.cshtml" />
+    <Content Include="Views\UserProfile\Delete.cshtml" />
+    <Content Include="Views\UserProfile\Details.cshtml" />
+    <Content Include="Views\UserProfile\Edit.cshtml" />
+    <Content Include="Views\UserProfile\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Administration\Models\" />
     <Folder Include="Areas\Administration\Views\Admin\" />
     <Folder Include="img\" />
+    <Folder Include="Views\Admin\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>

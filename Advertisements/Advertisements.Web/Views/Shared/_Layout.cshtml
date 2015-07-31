@@ -20,6 +20,10 @@
                         <span class="icon-bar"></span>
                     </button>
                     @Html.ActionLink("Advertisements", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                    @if (User.Identity.IsAuthenticated || User.IsInRole("Administrator"))
+                    {
+                       @Html.ActionLink("User profile", "Index", "UserProfile", new { area = "" }, new { @class = "navbar-brand" })
+                    }
                     <span></span>
                 </div>
                 <div class="navbar-collapse collapse">

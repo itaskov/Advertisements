@@ -48,6 +48,8 @@ namespace Advertisements.Web.Controllers
                     TownId = model.TownId
                 }
             };
+
+            ViewBag.Title = "Ads - Home";
             
             return View("_AllAds", viewModel);
         }

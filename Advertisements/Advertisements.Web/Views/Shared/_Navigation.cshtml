@@ -2,7 +2,7 @@
     <fieldset>
         <legend>Navigation</legend>
         <div class="btn-group-vertical">
-            <a href="#" class="btn btn-default">Home</a>
+            @Html.ActionLink("Home", "Index", "Home", null, new { @class = "btn btn-default" })
             @if (User.Identity.IsAuthenticated)
             {
                 @Html.ActionLink("My Ads", "Index", "Advertisements", null, new { @class = "btn btn-default" })

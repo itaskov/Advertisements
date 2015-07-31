@@ -99,6 +99,8 @@ namespace Advertisements.Web.Controllers
                 NumberOfPages = numberOfPages
             };
 
+            ViewBag.Title = "Ads - My Ads";
+
             return View("_AllAds", viewModel);
         }
         
