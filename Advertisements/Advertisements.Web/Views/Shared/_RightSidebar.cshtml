@@ -1,7 +1,12 @@
 ﻿@model Advertisements.Infrastructures.ViewModels.Home.RightSideBarViewModel
 
+@{
+    var controllerName = ViewContext.RouteData.GetRequiredString("controller");
+    var actionName = ViewContext.RouteData.GetRequiredString("action");
+}
+
 <div class="well">
-    @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+    @using (Html.BeginForm(actionName, controllerName, FormMethod.Get))
     {
         <fieldset>
             <legend>Search</legend>
