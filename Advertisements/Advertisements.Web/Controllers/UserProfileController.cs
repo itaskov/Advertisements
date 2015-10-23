@@ -8,28 +8,17 @@ using System.Web;
 using System.Web.Mvc;
 using Advertisements.Data;
 using Advertisements.Models;
-using Advertisements.Web.Infrastructure.DataLoader;
 
 namespace Advertisements.Web.Controllers
 {
-    public class UserProfileController : AdminController
+    public class UserProfileController : Controller
     {
-        public UserProfileController()
-            : this (new AdsData(), new EfDataLoader())
-        {
-            
-        }
+        private ApplicationDbContext db = new ApplicationDbContext();
 
-        public UserProfileController(IAdsData data, IDataLoader dataLoader)
-            : base(data, dataLoader)
-        {
-
-        }
-        
         // GET: UserProfile
         public ActionResult Index()
         {
-            var applicationUsers = Data.Users.All().Include(a => a.Town);
+            var applicationUsers = db.Users.Include(a => a.Town);
             return View(applicationUsers.ToList());
         }
 
@@ -40,7 +29,7 @@ namespace Advertisements.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ApplicationUser applicationUser = Data.Users.GetById(id);
+            ApplicationUser applicationUser = db.Users.Find(id);
             if (applicationUser == null)
             {
                 return HttpNotFound();
@@ -51,7 +40,7 @@ namespace Advertisements.Web.Controllers
         // GET: UserProfile/Create
         public ActionResult Create()
         {
-            ViewBag.TownId = new SelectList(Data.Towns.All(), "Id", "Name");
+            ViewBag.TownId = new SelectList(db.Towns, "Id", "Name");
             return View();
         }
 
@@ -60,16 +49,16 @@ namespace Advertisements.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Name,TownId,Email,PhoneNumber,UserName")] ApplicationUser applicationUser)
+        public ActionResult Create([Bind(Include = "Id,Name,TownId,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] ApplicationUser applicationUser)
         {
             if (ModelState.IsValid)
             {
-                Data.Users.Add(applicationUser);
-                Data.SaveChanges();
+                db.Users.Add(applicationUser);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.TownId = new SelectList(Data.Towns.All(), "Id", "Name", applicationUser.TownId);
+            ViewBag.TownId = new SelectList(db.Towns, "Id", "Name", applicationUser.TownId);
             return View(applicationUser);
         }
 
@@ -80,12 +69,12 @@ namespace Advertisements.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ApplicationUser applicationUser = Data.Users.GetById(id);
+            ApplicationUser applicationUser = db.Users.Find(id);
             if (applicationUser == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.TownId = new SelectList(Data.Towns.All(), "Id", "Name", applicationUser.TownId);
+            ViewBag.TownId = new SelectList(db.Towns, "Id", "Name", applicationUser.TownId);
             return View(applicationUser);
         }
 
@@ -94,15 +83,15 @@ namespace Advertisements.Web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Name,TownId,Email,PhoneNumber,UserName")] ApplicationUser applicationUser)
+        public ActionResult Edit([Bind(Include = "Id,Name,TownId,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] ApplicationUser applicationUser)
         {
             if (ModelState.IsValid)
             {
-                Data.Users.Update(applicationUser);
-                Data.SaveChanges();
+                db.Entry(applicationUser).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.TownId = new SelectList(Data.Towns.All(), "Id", "Name", applicationUser.TownId);
+            ViewBag.TownId = new SelectList(db.Towns, "Id", "Name", applicationUser.TownId);
             return View(applicationUser);
         }
 
@@ -113,7 +102,7 @@ namespace Advertisements.Web.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ApplicationUser applicationUser = Data.Users.GetById(id);
+            ApplicationUser applicationUser = db.Users.Find(id);
             if (applicationUser == null)
             {
                 return HttpNotFound();
@@ -126,9 +115,9 @@ namespace Advertisements.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            ApplicationUser applicationUser = Data.Users.GetById(id);
-            Data.Users.Delete(applicationUser);
-            Data.SaveChanges();
+            ApplicationUser applicationUser = db.Users.Find(id);
+            db.Users.Remove(applicationUser);
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -136,7 +125,7 @@ namespace Advertisements.Web.Controllers
         {
             if (disposing)
             {
-                Data.Users.Dispose();
+                db.Dispose();
             }
             base.Dispose(disposing);
         }

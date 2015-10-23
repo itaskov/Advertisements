@@ -51,7 +51,7 @@ namespace Advertisements.Web.Controllers
 
             ViewBag.Title = "Ads - Home";
             
-            return View("_AllAds", viewModel);
+            return View(viewModel);
         }
     }
 }

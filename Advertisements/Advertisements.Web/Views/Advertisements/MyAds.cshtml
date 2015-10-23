@@ -1,0 +1,62 @@
+﻿@model Advertisements.Infrastructures.ViewModels.Advertisements.MyAdViewModel
+
+<header>
+    <h2 class="text-center">@ViewBag.Title</h2>
+</header>
+
+@foreach (var ad in Model.MyAds)
+{
+    <article>
+        <div id="ad-list-group-item" class="list-group-item">
+            <header>
+                <div class="row">
+                    <div class="col-md-8">
+                        <h3 class="pull-left">@ad.Title</h3>
+                    </div>
+                    <div class="col-md-4">
+                        <span class="pull-right">
+                            @Html.DisplayFor(item => ad.DateCreated)
+                        </span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="row">
+                <div class="col-md-4">
+                    @*<img class="img-rounded img-responsive" src="@(ad.ImageDataURL.StartsWith("data:") ? ad.ImageDataURL : Url.Content(ad.ImageDataURL))" />*@
+                    <img class="img-rounded img-responsive" src="@if (ad.ImageDataURL != null && ad.ImageDataURL.StartsWith("data:"))
+                                                                 {
+                                                                     @ad.ImageDataURL
+                                                                 }
+                                                                 else if (ad.ImageDataURL != null)
+                                                                 {
+                                                                    @Url.Content(ad.ImageDataURL)
+                                                                 }" />
+                </div>
+                <div class="col-md-8">
+                    <p>
+                        @ad.Text
+                    </p>
+                    <div class="row">
+                        <div class="form-group">
+                            @Html.LabelFor(item => ad.Category, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DisplayFor(item => ad.Category, new { htmlAttributes = new { @class = "form-control" }})
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(item => ad.Town, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.DisplayFor(item => ad.Town, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+}
+
+

@@ -10,7 +10,7 @@ using Advertisements.Web.Infrastructure.DataLoader;
 namespace Advertisements.Web.Controllers
 {
     [Authorize(Roles = "Administrator")]
-    public class AdminController : AuthorizeController
+    public class AdminController : AuthorizationController
     {
         public AdminController(IAdsData data, IDataLoader dataLoader)
             : base(data, dataLoader)

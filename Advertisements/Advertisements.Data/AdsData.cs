@@ -1,4 +1,6 @@
-﻿namespace Advertisements.Data
+﻿using System.Data.Entity.Validation;
+
+namespace Advertisements.Data
 {
     using System;
     using System.Collections.Generic;
@@ -24,7 +26,7 @@
             this.repositories = new Dictionary<Type, object>();
         }
 
-        public IRepository<ApplicationUser> Users
+        public IRepository<ApplicationUser> ApplicationUsers
         {
             get
             {
@@ -67,7 +69,15 @@
 
         public int SaveChanges()
         {
-            return this.context.SaveChanges();
+            try
+            {
+                return this.context.SaveChanges();
+            }
+            catch (DbEntityValidationException e)
+            {
+                var ex = e;
+                throw;
+            }
         }
 
         private IRepository<T> GetRepository<T>() where T : class

@@ -75,6 +75,7 @@
     <Compile Include="Services\HomeServices.cs" />
     <Compile Include="Services\Contracts\IHomeServices.cs" />
     <Compile Include="Services\Validation\ModelStateWrapper.cs" />
+    <Compile Include="ViewModels\Advertisements\MyAdViewModel.cs" />
     <Compile Include="ViewModels\Home\AdsIndexViewModel.cs" />
     <Compile Include="ViewModels\Home\IndexViewModel.cs" />
     <Compile Include="ViewModels\Home\PaginationViewModel.cs" />

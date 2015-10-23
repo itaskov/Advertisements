@@ -46,7 +46,7 @@ namespace Advertisements.Web.Areas.Administration.Controllers
         public ActionResult Create()
         {
             ViewBag.CategoryId = new SelectList(this.Data.Categories.All(), "Id", "Name");
-            ViewBag.OwnerId = new SelectList(this.Data.Users.All(), "Id", "Name");
+            ViewBag.OwnerId = new SelectList(this.Data.ApplicationUsers.All(), "Id", "Name");
             ViewBag.TownId = new SelectList(this.Data.Towns.All(), "Id", "Name");
             return View();
         }
@@ -66,7 +66,7 @@ namespace Advertisements.Web.Areas.Administration.Controllers
             }
 
             ViewBag.CategoryId = new SelectList(this.Data.Categories.All(), "Id", "Name", advertisement.CategoryId);
-            ViewBag.OwnerId = new SelectList(this.Data.Users.All(), "Id", "Name", advertisement.OwnerId);
+            ViewBag.OwnerId = new SelectList(this.Data.ApplicationUsers.All(), "Id", "Name", advertisement.OwnerId);
             ViewBag.TownId = new SelectList(this.Data.Towns.All(), "Id", "Name", advertisement.TownId);
             return View(advertisement);
         }
@@ -84,7 +84,7 @@ namespace Advertisements.Web.Areas.Administration.Controllers
                 return HttpNotFound();
             }
             ViewBag.CategoryId = new SelectList(this.Data.Categories.All(), "Id", "Name", advertisement.CategoryId);
-            ViewBag.OwnerId = new SelectList(this.Data.Users.All(), "Id", "Name", advertisement.OwnerId);
+            ViewBag.OwnerId = new SelectList(this.Data.ApplicationUsers.All(), "Id", "Name", advertisement.OwnerId);
             ViewBag.TownId = new SelectList(this.Data.Towns.All(), "Id", "Name", advertisement.TownId);
             return View(advertisement);
         }
@@ -103,7 +103,7 @@ namespace Advertisements.Web.Areas.Administration.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.CategoryId = new SelectList(this.Data.Categories.All(), "Id", "Name", advertisement.CategoryId);
-            ViewBag.OwnerId = new SelectList(this.Data.Users.All(), "Id", "Name", advertisement.OwnerId);
+            ViewBag.OwnerId = new SelectList(this.Data.ApplicationUsers.All(), "Id", "Name", advertisement.OwnerId);
             ViewBag.TownId = new SelectList(this.Data.Towns.All(), "Id", "Name", advertisement.TownId);
             return View(advertisement);
         }

@@ -5,7 +5,7 @@
 
     public interface IAdsData
     {
-        IRepository<ApplicationUser> Users { get; }
+        IRepository<ApplicationUser> ApplicationUsers { get; }
 
         IRepository<IdentityRole> UserRoles { get; }
 

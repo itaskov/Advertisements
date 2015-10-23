@@ -22,7 +22,7 @@
                     @Html.ActionLink("Advertisements", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
                     @if (User.Identity.IsAuthenticated || User.IsInRole("Administrator"))
                     {
-                       @Html.ActionLink("User profile", "Index", "UserProfile", new { area = "" }, new { @class = "navbar-brand" })
+                        @Html.ActionLink("User's profile", "Index", "UserProfile", new { area = "" }, new { @class = "navbar-brand" })
                     }
                     <span></span>
                 </div>
@@ -34,11 +34,15 @@
     </header>
 
     @{
+        const string homeCtrl = "Home";
+        const string advertisementsCtrl = "Advertisements";
+        const string indexMethod = "Index";
+        const string myAdsMethod = "MyAds";
         var containerClass = "container";
         var controllerName = ViewContext.RouteData.GetRequiredString("controller");
         var actionName = ViewContext.RouteData.GetRequiredString("action");
-        if (controllerName == "Home" ||
-           (controllerName == "Advertisements" && actionName == "Index"))
+        if (controllerName == homeCtrl ||
+           (controllerName == advertisementsCtrl && (actionName == indexMethod || actionName == myAdsMethod)))
         {
             containerClass = "container-fluid";
         }
@@ -49,7 +53,10 @@
             <div class="col-md-2 col-navigation">
                 <div class="position-fixed">
                     <aside>
-                        @RenderSection("Navigation", false)
+                        @RenderSection("Navigation", required: false)
+                    </aside>
+                    <aside>
+                        @RenderSection("MyAdsLeftSidebar", required: false)
                     </aside>
                 </div>
             </div>
@@ -65,7 +72,7 @@
             <div class="col-md-2 col-right-sidebar">
                 <div class="position-fixed">
                     <aside>
-                        @RenderSection("RightSideBar", false)
+                        @RenderSection("RightSideBar", required: false)
                     </aside>
                 </div>
             </div>

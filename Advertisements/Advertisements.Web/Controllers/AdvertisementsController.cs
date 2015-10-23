@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Runtime.InteropServices;
 using System.Web;
 using System.Web.Mvc;
@@ -11,6 +13,7 @@ using Advertisements.Infrastructures.InputModels.Advertisements;
 using Advertisements.Infrastructures.Services;
 using Advertisements.Infrastructures.Services.Contracts;
 using Advertisements.Infrastructures.Services.Validation;
+using Advertisements.Infrastructures.ViewModels.Advertisements;
 using Advertisements.Infrastructures.ViewModels.Home;
 using Advertisements.Models;
 using Advertisements.Web.Infrastructure.Caching;
@@ -18,11 +21,11 @@ using Advertisements.Web.Infrastructure.DataLoader;
 using AutoMapper;
 using Microsoft.AspNet.Identity;
 
-using  AutoMapper.QueryableExtensions;
+using AutoMapper.QueryableExtensions;
 
 namespace Advertisements.Web.Controllers
 {
-    public class AdvertisementsController : BaseController
+    public class AdvertisementsController : AuthorizationController
     {
         private readonly IAdvertisementsService advertisementsService;
         private readonly IAspNetCurrentAppCache cache;
@@ -42,7 +45,7 @@ namespace Advertisements.Web.Controllers
         public AdvertisementsController(IAdsData adsData)
             : base(adsData, new EfDataLoader())
         {
-            
+
         }
 
         #region Create ad using service layer!
@@ -69,18 +72,22 @@ namespace Advertisements.Web.Controllers
         public ActionResult Index(RightSideBarViewModel model)
         {
             var currentPage = model.SelectedPage.GetValueOrDefault(1);
-            var currentUserId = this.User.Identity.GetUserId();
             var adsPerPage = model.PageSize == 0 ? HomeController.AdsPageSize : model.PageSize;
             var numberOfUserAds = this.Data.Advertisements
                 .All()
-                .Count(a => a.OwnerId == currentUserId);
+                .Where(a => model.CategoryId == null || a.CategoryId == model.CategoryId &&
+                        model.TownId == null || a.TownId == model.TownId)
+                .Count(a => a.OwnerId == this.CurrentUserId);
+
             var numberOfPages = (int)Math.Ceiling((double)numberOfUserAds / adsPerPage);
 
             var viewModel = new IndexViewModel();
             var itemsToSkip = (currentPage - 1) * adsPerPage;
             var adsIndexViewModel = this.Data.Advertisements
                 .All()
-                .Where(a => a.Owner.Id == currentUserId)
+                .Where(a => a.Owner.Id == this.CurrentUserId)
+                .Where(a => model.CategoryId == null || a.CategoryId == model.CategoryId &&
+                        model.TownId == null || a.TownId == model.TownId)
                 .OrderBy(a => a.Id)
                 .Skip(itemsToSkip)
                 .Take(adsPerPage);
@@ -101,11 +108,29 @@ namespace Advertisements.Web.Controllers
 
             ViewBag.Title = "Ads - My Ads";
 
-            return View("_AllAds", viewModel);
+            return View(viewModel);
         }
-        
+
+        //public ActionResult MyAds(AdvertisementStatus? status)
+        //{
+        //    var myAds = this.Data.Advertisements
+        //        .All()
+        //        .Where(a => a.Owner.Id == this.CurrentUserId)
+        //        .Where(a => status == null || a.Status == status);
+
+        //    var viewModel = new MyAdViewModel();
+        //    //viewModel.MyAds = myAds
+        //    //    .Project()
+        //    //    .To<MyAdViewModel>()
+        //    //    .ToList();
+
+        //    viewModel.MyAds = myAds.Select(MyAdViewModel.FromAdvertisement).ToList();
+        //    ViewBag.Title = "Ads - My Ads";
+
+        //    return View(viewModel);
+        //}
+
         [HttpGet]
-        [Authorize]
         public ActionResult Create()
         {
             var model = new AdsCreateViewModel
@@ -117,7 +142,6 @@ namespace Advertisements.Web.Controllers
             return View(model);
         }
 
-        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(AdsCreateViewModel model)
@@ -127,14 +151,14 @@ namespace Advertisements.Web.Controllers
                 var dbAd = Mapper.Map<Advertisement>(model);
                 dbAd.Status = AdvertisementStatus.WaitingApproval;
                 dbAd.OwnerId = this.User.Identity.GetUserId();
-                
+
                 this.Data.Advertisements.Add(dbAd);
 
                 this.SaveImage(model.Image);
 
                 this.Data.SaveChanges();
-                
-                return this.RedirectToAction("Index", "Home");
+
+                return this.RedirectToAction("Index");
             }
 
             return View(model);
@@ -151,7 +175,52 @@ namespace Advertisements.Web.Controllers
             string fileSavePath = null;
             fileName = Path.GetFileName(image.FileName);
             fileSavePath = Server.MapPath(Constant.VirtualPath + fileName);
-            image.SaveAs(fileSavePath); 
+            image.SaveAs(fileSavePath);
+        }
+
+        // GET: UserProfile
+        public ActionResult IndexUserProfile()
+        {
+            var applicationUsers = Data.ApplicationUsers.All().Include(a => a.Town).Where(a => a.Id == this.CurrentUserId);
+            return View(applicationUsers.ToList());
+        }
+
+        // GET: UserProfile/Edit/5
+        public ActionResult EditUserProfile(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ApplicationUser applicationUser = this.Data.ApplicationUsers.GetById(id);
+            if (applicationUser == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.TownId = new SelectList(this.Data.Towns.All(), "Id", "Name", applicationUser.TownId);
+            return View(applicationUser);
+        }
+
+        // POST: UserProfile/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditUserProfile([Bind(Include = "Id,Name,TownId,Email,EmailConfirmed,PasswordHash,SecurityStamp,PhoneNumber,PhoneNumberConfirmed,TwoFactorEnabled,LockoutEndDateUtc,LockoutEnabled,AccessFailedCount,UserName")] ApplicationUser applicationUser)
+        {
+            if (this.CurrentUserId != applicationUser.Id)
+            {
+                this.ModelState.AddModelError("Id", "Unexpected user id!");
+            }
+
+            if (ModelState.IsValid)
+            {
+                this.Data.ApplicationUsers.Update(applicationUser);
+                this.Data.SaveChanges();
+                return RedirectToAction("IndexUserProfile");
+            }
+            ViewBag.TownId = new SelectList(this.Data.Towns.All(), "Id", "Name", applicationUser.TownId);
+            return View(applicationUser);
         }
     }
 }

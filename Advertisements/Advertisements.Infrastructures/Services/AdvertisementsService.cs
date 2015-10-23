@@ -36,7 +36,7 @@ namespace Advertisements.Infrastructures.Services
             {
                 var dbAd = AutoMapper.Mapper.Map<Advertisement>(model);
                 dbAd.Status = AdvertisementStatus.WaitingApproval;
-                dbAd.OwnerId = this.Data.Users.All().Select(u => u.Id).FirstOrDefault();
+                dbAd.OwnerId = this.Data.ApplicationUsers.All().Select(u => u.Id).FirstOrDefault();
                 this.Data.Advertisements.Add(dbAd);
                 this.Data.SaveChanges();
 

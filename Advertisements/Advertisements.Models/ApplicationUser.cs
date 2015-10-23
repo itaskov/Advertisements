@@ -20,6 +20,7 @@
         //[Required]
         public string Name { get; set; }
 
+        [Display(Name = "Town")]
         public int? TownId { get; set; }
 
         public virtual Town Town { get; set; }

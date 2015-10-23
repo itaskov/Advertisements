@@ -1,4 +1,5 @@
-﻿<div class="well">
+﻿@using Microsoft.AspNet.Identity
+<div class="well">
     <fieldset>
         <legend>Navigation</legend>
         <div class="btn-group-vertical">
@@ -7,7 +8,7 @@
             {
                 @Html.ActionLink("My Ads", "Index", "Advertisements", null, new { @class = "btn btn-default" })
                 @Html.ActionLink("Publish New Ad", "Create", "Advertisements", null, new { @class = "btn btn-default" })
-                <a href="#" class="btn btn-default">Edit Profile</a>
+                @Html.ActionLink("Edit Profile", "EditUserProfile", "Advertisements", new { Id = User.Identity.GetUserId() }, new { @class = "btn btn-default" })
             }
         </div>
     </fieldset>
