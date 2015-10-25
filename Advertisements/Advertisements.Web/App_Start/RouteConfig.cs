@@ -14,6 +14,13 @@ namespace Advertisements.Web
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "Advertisements",
+                url: "Advertisements/Pagination/{status}",
+                defaults: new { controller = "Advertisements", action = "Pagination", status = UrlParameter.Optional },
+                namespaces: new[] { "Advertisements.Web.Controllers" }
+            );
+            
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },

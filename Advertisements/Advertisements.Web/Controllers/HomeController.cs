@@ -29,7 +29,7 @@ namespace Advertisements.Web.Controllers
         {
             this.homeServices = homeServices;
         }
-        
+
         public ActionResult Index(RightSideBarViewModel model)
         {
             model.PageSize = AdsPageSize;
@@ -52,6 +52,30 @@ namespace Advertisements.Web.Controllers
             ViewBag.Title = "Ads - Home";
             
             return View(viewModel);
+        }
+
+        public ActionResult Pagination(RightSideBarViewModel model)
+        {
+            model.PageSize = AdsPageSize;
+            var ads = this.homeServices.GetAdsByPageSize(model).ToList();
+
+            var viewModel = new IndexViewModel
+            {
+                AdsIndexViewModel = ads,
+                RightSideBarViewModel = new RightSideBarViewModel
+                {
+                    Categories = this.DataLoader.GetCategoriesSelectListItem().ToList(),
+                    Towns = this.DataLoader.GetTownsSelectListItem().ToList(),
+                    NumberOfPages = (int)Math.Ceiling((double)this.homeServices.GetAllAds(model).Count() / AdsPageSize),
+                    SelectedPage = model.SelectedPage.GetValueOrDefault(1),
+                    CategoryId = model.CategoryId,
+                    TownId = model.TownId
+                }
+            };
+
+            ViewBag.Title = "Ads - Home";
+
+            return View("Index", viewModel);
         }
     }
 }

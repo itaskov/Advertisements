@@ -10,15 +10,16 @@
 
 <div id="all-ads" class="jumbotron">
     @Html.Partial("_Pagination", @Model.RightSideBarViewModel)
-    @Html.Partial("_Advertisement", @Model.AdsIndexViewModel)
+    @Html.Partial("Advertisement", @Model.AdsIndexViewModel)
 </div>
 
-@section MyAdsLeftSidebar
-{
-    @Html.Partial("MyAdsLeftSidebar")
-}
 
 @section Navigation
 {
     @Html.Partial("_Navigation")
+}
+
+@section MyAdsLeftSidebar
+{
+    @Html.Partial("MyAdsLeftSidebar")
 }

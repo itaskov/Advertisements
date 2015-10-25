@@ -22,6 +22,7 @@ using AutoMapper;
 using Microsoft.AspNet.Identity;
 
 using AutoMapper.QueryableExtensions;
+using Microsoft.Owin.Security;
 
 namespace Advertisements.Web.Controllers
 {
@@ -73,21 +74,19 @@ namespace Advertisements.Web.Controllers
         {
             var currentPage = model.SelectedPage.GetValueOrDefault(1);
             var adsPerPage = model.PageSize == 0 ? HomeController.AdsPageSize : model.PageSize;
-            var numberOfUserAds = this.Data.Advertisements
-                .All()
-                .Where(a => model.CategoryId == null || a.CategoryId == model.CategoryId &&
-                        model.TownId == null || a.TownId == model.TownId)
-                .Count(a => a.OwnerId == this.CurrentUserId);
 
+            var adsIndexViewModel = this.Data.Advertisements
+                .All()
+                .Where(a => a.Owner.Id == this.CurrentUserId);
+                
+            var numberOfUserAds = adsIndexViewModel.Count();
+           
             var numberOfPages = (int)Math.Ceiling((double)numberOfUserAds / adsPerPage);
 
             var viewModel = new IndexViewModel();
             var itemsToSkip = (currentPage - 1) * adsPerPage;
-            var adsIndexViewModel = this.Data.Advertisements
-                .All()
-                .Where(a => a.Owner.Id == this.CurrentUserId)
-                .Where(a => model.CategoryId == null || a.CategoryId == model.CategoryId &&
-                        model.TownId == null || a.TownId == model.TownId)
+            
+            adsIndexViewModel = adsIndexViewModel
                 .OrderBy(a => a.Id)
                 .Skip(itemsToSkip)
                 .Take(adsPerPage);
@@ -109,6 +108,58 @@ namespace Advertisements.Web.Controllers
             ViewBag.Title = "Ads - My Ads";
 
             return View(viewModel);
+        }
+
+        public ActionResult Pagination(RightSideBarViewModel model, AdvertisementStatus? status)
+        {
+            var currentPage = model.SelectedPage.GetValueOrDefault(1);
+            var adsPerPage = model.PageSize == 0 ? HomeController.AdsPageSize : model.PageSize;
+
+            var adsIndexViewModel = this.Data.Advertisements
+                .All()
+                .Where(a => a.Owner.Id == this.CurrentUserId)
+                .Where(a => status == null || a.Status == status);
+
+            var numberOfUserAds = adsIndexViewModel.Count();
+
+            var numberOfPages = (int)Math.Ceiling((double)numberOfUserAds / adsPerPage);
+
+            var viewModel = new IndexViewModel();
+            var itemsToSkip = (currentPage - 1) * adsPerPage;
+
+            adsIndexViewModel = adsIndexViewModel
+                .OrderBy(a => a.Id)
+                .Skip(itemsToSkip)
+                .Take(adsPerPage);
+            viewModel.AdsIndexViewModel = adsIndexViewModel
+                .Project()
+                .To<AdsIndexViewModel>()
+                .ToList();
+
+            viewModel.RightSideBarViewModel = new RightSideBarViewModel
+            {
+                SelectedPage = currentPage,
+                NumberOfPages = numberOfPages
+            };
+
+            ViewBag.Title = "Ads - My Ads";
+
+            return View("Index", viewModel);
+        }
+
+        public ActionResult DeactivateAd(int id)
+        {
+            var ad = this.Data.Advertisements.GetById(id);
+            if (ad == null)
+            {
+                return HttpNotFound();
+            }
+
+            ad.Status = AdvertisementStatus.Inactive;
+            this.Data.Advertisements.Update(ad);
+            this.Data.SaveChanges();
+
+            return Content(ad.Status.ToString());
         }
 
         //public ActionResult MyAds(AdvertisementStatus? status)

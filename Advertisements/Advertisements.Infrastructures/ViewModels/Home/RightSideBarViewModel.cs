@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
+using Advertisements.Models;
 
 namespace Advertisements.Infrastructures.ViewModels.Home
 {
@@ -22,5 +23,7 @@ namespace Advertisements.Infrastructures.ViewModels.Home
         public int NumberOfPages { get; set; }
 
         public int PageSize { get; set; }
+
+        //public AdvertisementStatus? Status { get; set; }
     }
 }

@@ -315,7 +315,7 @@
     <Content Include="Views\Shared\DisplayTemplates\Date.cshtml" />
     <Content Include="Views\Account\EditorTemplates\DropDownList.cshtml" />
     <Content Include="Views\Shared\_Pagination.cshtml" />
-    <Content Include="Views\Shared\_Advertisement.cshtml" />
+    <Content Include="Views\Home\Advertisement.cshtml" />
     <Content Include="Views\Shared\_Navigation.cshtml" />
     <Content Include="Views\Shared\_RightSidebar.cshtml" />
     <Content Include="Views\Account\EditorTemplates\_RightSidebarDropDownList.cshtml" />
@@ -331,6 +331,7 @@
     <Content Include="Views\Advertisements\MyAds.cshtml" />
     <Content Include="Views\Advertisements\Index.cshtml" />
     <Content Include="Views\Advertisements\MyAdsLeftSidebar.cshtml" />
+    <Content Include="Views\Advertisements\Advertisement.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

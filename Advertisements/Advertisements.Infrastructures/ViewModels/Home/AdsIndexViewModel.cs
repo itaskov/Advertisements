@@ -10,6 +10,8 @@ namespace Advertisements.Infrastructures.ViewModels.Home
 {
     public class AdsIndexViewModel : IMapFrom<Advertisement>, IHaveCustomMappings
     {
+        public int Id { get; set; }
+        
         public string Title { get; set; }
 
         public string Text { get; set; }
@@ -24,6 +26,8 @@ namespace Advertisements.Infrastructures.ViewModels.Home
 
         [DataType(DataType.Date)]
         public DateTime DateCreated { get; set; }
+
+        public AdvertisementStatus Status { get; set; }
 
         #region IHaveCustomMappings Members
 

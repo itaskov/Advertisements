@@ -7,6 +7,7 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
 
 </head>
 <body>
@@ -38,13 +39,20 @@
         const string advertisementsCtrl = "Advertisements";
         const string indexMethod = "Index";
         const string myAdsMethod = "MyAds";
+        const string paginationMethod = "Pagination";
         var containerClass = "container";
         var controllerName = ViewContext.RouteData.GetRequiredString("controller");
         var actionName = ViewContext.RouteData.GetRequiredString("action");
         if (controllerName == homeCtrl ||
-           (controllerName == advertisementsCtrl && (actionName == indexMethod || actionName == myAdsMethod)))
+           (controllerName == advertisementsCtrl && (actionName == indexMethod || actionName == myAdsMethod || actionName == paginationMethod)))
         {
             containerClass = "container-fluid";
+        }
+
+        string middleColumnClass = "col-md-8 col-center";
+        if (controllerName == advertisementsCtrl)
+        {
+            middleColumnClass = "col-md-10 col-center";
         }
     }
 
@@ -61,7 +69,7 @@
                 </div>
             </div>
 
-            <div class="col-md-8 col-center">
+            <div class="@middleColumnClass">
                 <main>
                     <section>
                         @RenderBody()
@@ -83,7 +91,6 @@
         <p class="text-center">&copy; <em><strong>@DateTime.Now.Year - Advertisements</strong></em></p>
     </footer>
 
-    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
