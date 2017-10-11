@@ -21,7 +21,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Advertisements", "Index", "Home", new {area = ""}, new {@class = "navbar-brand"})
+                @Html.ActionLink("Advertisements-Test", "Index", "Home", new {area = ""}, new {@class = "navbar-brand"})
                 @if (User.Identity.IsAuthenticated || User.IsInRole("Administrator"))
                 {
                     @Html.ActionLink("User's profile", "Index", "UserProfile", new {area = ""}, new {@class = "navbar-brand"})
